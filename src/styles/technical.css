@@ -1,0 +1,194 @@
+.technical-intro {
+    position: fixed;
+    z-index: 0;
+    top: var(--header-height);
+    left: 0;
+    inline-size: 100%;
+    block-size: 50vh;
+
+    translate: 0 200%;
+}
+
+.technical {
+    --size: 160px;
+    --icon-color: var(--fg-color);
+
+    position: fixed;
+    z-index: 1;
+    inset: 0;
+    top: var(--header-height);
+    height: calc(100vh - var(--header-height));
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    @media (min-width: 768px) {
+        --size: 200px;
+    }
+
+    .technical-background {
+        inline-size: var(--size);
+        block-size: var(--size);
+        border-radius: var(--size);
+        border: 2px solid var(--border-color);
+
+        /* background-color: var(--fg-color);
+        background-image: url(/background.jpeg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+
+        @media (max-width: 600px) {
+            background-image: url(/background-sm.jpeg);
+        } */
+
+        background-color: var(--bg-circle);
+        backdrop-filter: saturate(180%) blur(10px);
+        -webkit-backdrop-filter: saturate(180%) blur(10px);
+
+        translate: 0 48vh;
+        @media (min-width: 768px) {
+            translate: 0 40vh;
+        }
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        > svg {
+            width: calc(var(--size) * 0.555);
+            height: calc(var(--size) * 0.555);
+            translate: 0 -2px;
+        }
+    }
+
+    .technical-cards {
+        position: absolute;
+        z-index: 1;
+        inset: 0;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .technical-card {
+            position: absolute;
+
+            inline-size: calc(100vw - var(--x));
+            max-inline-size: 650px;
+            block-size: calc(100vh - var(--dx) - var(--header-height));
+            max-block-size: 650px;
+            /* background-color: var(--bg-color); */
+            border: 1px solid var(--border-color);
+            border-radius: 2px;
+
+            translate: 100vmax 0;
+            rotate: 15deg;
+            scale: .8;
+
+            /* translate: 0 100vh;
+            scale: .8; */
+
+            background-color: var(--bg-header);
+            backdrop-filter: saturate(180%) blur(10px);
+            -webkit-backdrop-filter: saturate(180%) blur(10px);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .card-layout {
+                inline-size: 100%;
+                max-inline-size: 540px;
+                block-size: 100%;
+                padding-inline: var(--x);
+                padding-block: 12vh var(--x);
+
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: stretch;
+                gap: 1rem;
+
+                > h2 {
+                    font-size: clamp(2rem, 11vw, 4rem);
+                    font-weight: 900;
+                    line-height: 1.4;
+                }
+
+                .skills {
+                    inline-size: 100%;
+                    flex: 1;
+
+                    .skill-list {
+                        list-style: none;
+                        margin: 0;
+                        padding-inline: 0;
+                        padding-block-start: 1rem;
+
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: flex-start;
+                        align-items: flex-start;
+                        gap: 1rem;
+                        padding-inline-start: .75rem;
+
+                        @media (min-width: 500px) {
+                            padding-inline-start: 1rem;
+                        }
+
+                        .skill {
+                            .skill-circle {
+                                position: relative;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                text-align: center;
+
+                                > label {
+                                    position: absolute;
+                                    padding: 5px;
+                                    font-size: .75rem;
+                                }
+
+                                > svg {
+                                    transform: rotate(-90deg);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.technical-intro-trigger {
+    inline-size: 100%;
+    block-size: 100vh;
+
+    margin-block-start: -100vh;
+}
+
+.technical-trigger {
+    inline-size: 100%;
+
+    .technical-enter-tragger {
+        inline-size: 100%;
+        block-size: 100vh;
+    }
+
+    .technical-background-trigger {
+        inline-size: 100%;
+        block-size: 100vh;
+    }
+
+    .technical-cards-trigger {
+        margin-block-start: 80vh;
+        .technical-card-trigger {
+            inline-size: 100%;
+            block-size: 100vh;
+        }
+    }
+}

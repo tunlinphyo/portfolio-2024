@@ -1,0 +1,39 @@
+:root {
+    color-scheme: light dark;
+
+    --bg-color: #FFF;
+    --bg-header: #FFFB;
+    --bg-accent-color: #F5F5F5;
+    --bg-dark-color: #F5F5F5;
+    --bg-button: #EEEB;
+    --mouse-color: #999;
+
+    --fg-color: #000;
+    --fg-accent-color: #444;
+
+    --border-color: #888;
+    --swatch: #DDD;
+
+    --accent-color: hsl(204, 70%, 53%);
+
+    --bg-circle: #DDDB;
+
+    @media (prefers-color-scheme: dark) {
+        --bg-color: #222;
+        --bg-header: #222B;
+        --bg-accent-color: #272727;
+        --bg-dark-color: #181818;
+        --bg-button: #333B;
+        --mouse-color: #999;
+
+        --fg-color: #DDD;
+        --fg-accent-color: #AAA;
+
+        --border-color: #000;
+        --swatch: #333;
+
+        --accent-color: hsl(197, 71%, 73%);
+        
+        --bg-circle: #111B;
+    }
+}
