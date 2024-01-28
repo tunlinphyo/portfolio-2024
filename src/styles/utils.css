@@ -57,7 +57,8 @@ body {
         justify-content: space-between;
         align-items: stretch;
 
-        .mouse-trigger {
+        .mouse-trigger,
+        .buttons-trigger {
             inline-size: 100%;
             block-size: 60px;
         }

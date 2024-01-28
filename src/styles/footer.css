@@ -44,9 +44,10 @@
                 }
 
                 .devider {
-                    width: 0;
-                    height: 12px;
-                    border-right: 1px solid var(--accent-color);
+                    inline-size: 2px;
+                    block-size: 12px;
+                    border-radius: 2px;
+                    background-color: var(--accent-color);
                 }
 
                 .contact-link {

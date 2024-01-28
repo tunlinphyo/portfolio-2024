@@ -60,7 +60,7 @@ export class PageAnimation extends ElementBase {
         this.timeline.from(
             ".technical",
             {
-                y: window.innerHeight * 1.5,
+                y: this.rect.height * 1.5,
                 ease: this.EASE,
             },
             "<",

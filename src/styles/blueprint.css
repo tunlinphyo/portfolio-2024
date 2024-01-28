@@ -57,6 +57,26 @@
             }
         }
 
+        .header-links {
+            position: fixed;
+            z-index: 9;
+            top: 0;
+            left: 0; right: 0;
+
+            inline-size: 100%;
+            block-size: var(--header-height);
+            
+            pointer-events: none;
+            
+            .buttons {
+                outline: 1px dotted hotpink;
+                outline-offset: -1px;
+                .button {
+                    outline: 1px dotted hotpink;
+                }
+            }
+        }
+
         .section-intro {
             outline: 1px dotted hotpink;
             outline-offset: -1px;
@@ -106,18 +126,39 @@
                 outline-offset: -1px;
                 backdrop-filter: none;
                 -webkit-backdrop-filter: none;
+                border-top-color: hotpink;
 
-                .project-footer {
-                    .decoration {
-                        border-color: var(--fg-accent-color);
+                .project-layout {
+                    .project {
+                        .project-start {
+                            > h3 {
+                                outline: 1px dotted hotpink;
+                            }
+                        }
+            
+                        .project-end {
+                            > p {
+                                outline: 1px dotted hotpink;
+                            }
+                        }
                     }
-
-                    .controls {
-                        .control {
+            
+                    .project-footer {
+                        .decoration {
                             border-color: var(--fg-accent-color);
+                            > label {
+                                outline: 1px dotted hotpink;
+                            }
+                        }
+    
+                        .controls {
+                            .control {
+                                border-color: var(--fg-accent-color);
+                            }
                         }
                     }
                 }
+
             }
         }
 
@@ -125,6 +166,23 @@
             background-color: var(--bg-header);
             outline: 1px dotted hotpink;
             outline-offset: -1px;
+
+            .container {
+                .contacts {
+                    outline: 1px dotted hotpink;
+                }
+            }
+
+        }
+    }
+
+    .jumper {
+        background: var(--bg-color);
+        outline: 1px dotted hotpink;
+        outline-offset: -1px;
+
+        > svg {
+            outline: 1px dotted hotpink;
         }
     }
 }

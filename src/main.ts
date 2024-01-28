@@ -3,8 +3,8 @@ import { PageAnimation } from './scripts/page'
 import { ProjectsAnimation } from './scripts/projects'
 import './style.css'
 
-document.addEventListener("DOMContentLoaded", () => {
+window.onload = () => {
     new PageAnimation('.main')
     new HeaderAnimation('.header')
     new ProjectsAnimation(".projects")
-})
+}

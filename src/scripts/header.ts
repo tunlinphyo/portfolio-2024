@@ -13,6 +13,7 @@ export class HeaderAnimation extends ElementBase {
             if (window.scrollY < 2) mouse.play()
             this.played = true
         })
+        this.animateButtons()
         this.animateTop()
         this.subscribe()
     }
@@ -130,6 +131,31 @@ export class HeaderAnimation extends ElementBase {
         })
 
         return animation
+    }
+
+    private animateButtons() {
+        const animation = this.gsap.to(".header-links .button", {
+            opacity: 1,
+            scale: 1,
+            stagger: 0.2,
+            ease: this.EASE,
+            paused: true,
+        })
+
+        this.gsap.timeline({
+            scrollTrigger: {
+                trigger: ".buttons-trigger",
+                start: "top top",
+                end: "bottom top",
+                onEnter: () => {
+                    animation.play()
+                },
+                onLeaveBack: () => {
+                    animation.reverse()
+                },
+            }
+        })
+
     }
 
     private animateTop() {
