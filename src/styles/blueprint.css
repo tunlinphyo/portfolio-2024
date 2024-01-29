@@ -162,7 +162,10 @@
                     outline: 1px dotted var(--line-color);
                 }
             }
-
+        }
+        .footer-title {
+            color: transparent;
+            -webkit-text-stroke: 1px var(--fg-color);
         }
     }
 
