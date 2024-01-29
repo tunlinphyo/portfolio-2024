@@ -123,6 +123,7 @@
                         .project-start {
                             > h3 {
                                 outline: 1px dotted var(--line-color);
+                                -webkit-text-stroke: 1px var(--fg-color);
                             }
                         }
             
