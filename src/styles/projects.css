@@ -13,7 +13,7 @@
     --block-start: 6vh;
     --block-end: 0px;
     --border-color: var(--fg-accent-color);
-    
+
     position: fixed;
     z-index: 1;
     inset: 0;
@@ -42,7 +42,7 @@
 
         translate: 0 100vh;
         scale: 0.8;
-        
+
         border-top: 2px solid var(--border-color);
         border-radius: 0;
 
@@ -59,7 +59,7 @@
             margin-inline: auto;
             position: absolute;
             inset: 0;
-    
+
             display: grid;
             grid-template-columns: minmax(0, 1fr);
             grid-template-rows: minmax(0, 1fr) 60px;
@@ -78,64 +78,99 @@
                 grid-template-columns: minmax(0, 1fr);
                 grid-template-rows: minmax(0, .5fr) minmax(0, 1fr);
                 grid-column: span 2;
-                
+                gap: 1rem var(--x);
+
                 @media (min-width: 992px) {
                     grid-template-columns: subgrid;
                     grid-template-rows: minmax(0, 1fr);
                 }
-    
+
                 .project-start {
                     display: flex;
                     flex-direction: column;
                     justify-content: flex-end;
                     align-items: flex-start;
-    
+
                     > h3 {
                         font-size: clamp(3rem, 9vw, 7rem);
                         font-weight: 800;
                         line-height: 1.1;
-    
-                        color: transparent;
+
+                        /* color: transparent;
                         -webkit-text-stroke: 2px var(--fg-color);
-    
+
                         @media (min-width: 768px) {
                             -webkit-text-stroke-width: 3px;
-                        }
+                        } */
                     }
                 }
-    
+
                 .project-end {
                     display: flex;
+                    flex-direction: column;
                     justify-content: center;
-                    align-items: center;
-    
+                    align-items: flex-start;
+                    gap: 1rem;
+
+                    @media (min-width: 768px) {
+                        gap: 1.5rem;
+                    }
+
+                    @media (min-width: 992px) {
+                        &.with-button {
+                            padding-top: 50px;
+                        }
+                    }
+
                     > p {
+                        max-width: 600px;
                         text-align: justify;
-    
+
                         > a {
                             color: var(--fg-color);
-    
+
                             &:hover {
                                 color: var(--accent-color);
                             }
                         }
                     }
+
+                    .open-website {
+                        cursor: pointer;
+                        font-size: 1rem;
+                        text-transform: uppercase;
+                        padding: 0;
+                        border: none;
+                        outline: none;
+                        background-color: transparent;
+                        height: 40px;
+                        letter-spacing: 2px;
+                        color: var(--fg-color);
+
+                        display: none;
+                        justify-content: center;
+                        align-items: center;
+
+                        &:hover {
+                            color: var(--accent-color);
+                        }
+                    }
                 }
             }
-    
+
             .project-footer {
                 display: grid;
                 grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
                 grid-column: span 2;
-                
+
                 @media (min-width: 992px) {
                     grid-template-columns: subgrid;
                 }
-    
+
                 .decoration {
                     block-size: 100%;
                     border-block: 2px solid var(--border-color);
-    
+
                     > label {
                         display: inline-block;
 
@@ -146,18 +181,18 @@
                         }
                     }
                 }
-    
+
                 .controls {
                     display: flex;
                     justify-content: flex-end;
                     align-items: center;
                     gap: clamp(1rem, 2vw, 3rem);
-    
+
                     .control {
                         --icon-color: var(--fg-color);
                         --stoke-color: transparent;
                         --fill-color: var(--border-color);
-    
+
                         block-size: 100%;
                         aspect-ratio: 1 / 1;
                         border: none;
@@ -165,16 +200,16 @@
                         background-color: transparent;
                         padding: 0;
                         cursor: pointer;
-    
+
                         position: relative;
                         display: flex;
                         justify-content: center;
                         align-items: center;
                         transition: all .2s ease-in;
-    
+
                         border-radius: 50%;
-                        background: conic-gradient(var(--fill-color) 100%, var(--stoke-color) 0); 
-    
+                        background: conic-gradient(var(--fill-color) 100%, var(--stoke-color) 0);
+
                         > svg {
                             position: absolute;
                             z-index: 2;
@@ -182,24 +217,24 @@
                             height: 24px;
                             opacity: 0;
                         }
-    
+
                         &::before {
                             content: '';
                             position: absolute;
                             z-index: 0;
-                            inset: 2px; 
+                            inset: 2px;
                             border-radius: inherit;
                             background: var(--bg-color);
                             transition: all .2s ease-in;
                         }
-    
+
                         &:hover {
                             --icon-color: var(--bg-color);
                             --stoke-color: var(--bg-color);
                             --fill-color: var(--bg-color);
-                            
+
                             outline: 2px solid var(--border-color);
-    
+
                             &::before {
                                 inset: 2px;
                                 background-color: var(--border-color);
@@ -210,11 +245,11 @@
                             }
                         }
                     }
-    
+
                     &.disabled {
                         .control {
                             cursor: not-allowed;
-    
+
                             /* &:hover {
                                 background-color: transparent;
                                 --icon-color: var(--fg-color);

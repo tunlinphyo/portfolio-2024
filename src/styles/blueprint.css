@@ -30,7 +30,7 @@
                 outline: 1px dotted var(--line-color);
             }
         }
-    
+
         .header {
             backdrop-filter: none;
             -webkit-backdrop-filter: none;
@@ -126,14 +126,17 @@
                                 -webkit-text-stroke: 1px var(--fg-color);
                             }
                         }
-            
+
                         .project-end {
                             > p {
                                 outline: 1px dotted var(--line-color);
                             }
+                            .open-website {
+                                outline: 1px dotted var(--line-color);
+                            }
                         }
                     }
-            
+
                     .project-footer {
                         .decoration {
                             border-color: var(--fg-accent-color);
@@ -141,7 +144,7 @@
                                 outline: 1px dotted var(--line-color);
                             }
                         }
-    
+
                         .controls {
                             .control {
                                 border-color: var(--fg-accent-color);
@@ -168,6 +171,12 @@
             color: transparent;
             -webkit-text-stroke: 1px var(--fg-color);
         }
+    }
+
+    .iframe-container {
+        border: none;
+        outline: 1px solid var(--line-color);
+        outline-offset: -1px;
     }
 
     .jumper {

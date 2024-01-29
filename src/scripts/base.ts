@@ -1,9 +1,10 @@
 import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
 import ScrollToPlugin from "gsap/ScrollToPlugin"
-import { Flip } from "gsap/Flip"
+// import { Flip } from "gsap/Flip"
+import disableScroll from "./disabled-scroll"
 
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, Flip)
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
 export class ElementBase {
     protected HEADER_HEIGHT = 60
@@ -11,7 +12,7 @@ export class ElementBase {
     protected EASE = "power1.out"
     protected elem: HTMLElement
     protected gsap = gsap
-    protected flip = Flip
+    // protected flip = Flip
     protected scrollTrigger = ScrollTrigger
     protected timeline: gsap.core.Timeline
     protected sizeElem: HTMLElement
@@ -82,5 +83,13 @@ export class ElementBase {
 
     protected withMedia(): gsap.MatchMedia {
         return this.gsap.matchMedia()
+    }
+
+    protected disableScroll(elem?: Element): void {
+        disableScroll.on(elem)
+    }
+
+    protected enableScroll(): void {
+        disableScroll.off()
     }
 }

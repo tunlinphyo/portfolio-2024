@@ -33,7 +33,7 @@ export class HeaderAnimation extends ElementBase {
             document.body.classList.toggle("blueprint")
             const has = !!document.body.classList.contains("blueprint")
             console.log(has)
-            toggleTheme.dataset.popup = has ? "Blueprint Off" : "Blueprint On"
+            toggleTheme.dataset.popup = has ? "Blueprint On" : "Blueprint Off"
         })
     }
 
@@ -41,7 +41,7 @@ export class HeaderAnimation extends ElementBase {
         const timeline = this.gsap.timeline()
 
         timeline.fromTo(".jumper", {
-            x: window.innerWidth * -1,
+            x: window.innerWidth,
             scaleX: 0,
         }, {
             x: 0,
@@ -58,7 +58,7 @@ export class HeaderAnimation extends ElementBase {
             duration,
             ease: "bounce.out",
         }, ">").to(".jumper", {
-            x: window.innerWidth,
+            x: window.innerWidth * -1,
             scaleX: 0,
             ease: "power1.in"
         }, ">")
@@ -68,7 +68,7 @@ export class HeaderAnimation extends ElementBase {
         const timeline = this.gsap.timeline()
 
         timeline.fromTo(".jumper", {
-            x: window.innerWidth,
+            x: window.innerWidth * -1,
             scaleX: 0,
         }, {
             x: 0,
@@ -86,7 +86,7 @@ export class HeaderAnimation extends ElementBase {
             duration,
             ease: "bounce.out",
         }, ">").to(".jumper", {
-            x: window.innerWidth * -1,
+            x: window.innerWidth,
             scaleX: 0,
             ease: "power1.in"
         }, ">")
@@ -98,17 +98,25 @@ export class HeaderAnimation extends ElementBase {
         const intro = new SplitType('.header .intro', { types: 'words' })
 
         return new Promise((resolve) => {
-            this.gsap.to([ 
-                    ...hello.chars as HTMLElement[], 
+            const timeline = this.gsap.timeline()
+
+            timeline.to([
+                    ...hello.chars as HTMLElement[],
                     ...heading.chars as HTMLElement[],
-                    ...intro.words as HTMLElement[],
                 ], {
                 x: 0,
                 y: 0,
                 opacity: 1,
                 scale: 1,
-                ease: "power4.out",
-                stagger: 0.04,
+                ease: "power4.in",
+                stagger: 0.03,
+            }).to(intro.words, {
+                x: 0,
+                y: 0,
+                opacity: 1,
+                scale: 1,
+                ease: this.EASE,
+                stagger: 0.02,
                 onComplete: () => {
                     resolve(true)
                 }
@@ -184,7 +192,7 @@ export class HeaderAnimation extends ElementBase {
                 onEnter: () => {
                     animation.play()
                 },
-                onLeaveBack: () => { 
+                onLeaveBack: () => {
                     animation.reverse()
                 },
             }

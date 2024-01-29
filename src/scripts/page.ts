@@ -22,73 +22,44 @@ export class PageAnimation extends ElementBase {
     }
 
     private animateHeader() {
-        this.timeline
-            .to(".header", {
-                height: this.HEADER_HEIGHT,
-                ease: this.EASE,
-            })
-            .to(
-                ".header-name",
-                {
-                    fontSize: "1.2rem",
-                    ease: this.EASE,
-                },
-                0,
-            )
-            .to(
-                ".header-intro",
-                {
-                    opacity: 0,
-                    ease: this.EASE,
-                },
-                0,
-            );
+        this.timeline.to(".header", {
+            height: this.HEADER_HEIGHT,
+            ease: this.EASE,
+        }).to(".header-name", {
+            fontSize: "1.2rem",
+            ease: this.EASE,
+        }, 0).to(".header-intro", {
+            opacity: 0,
+            ease: this.EASE,
+        }, 0)
     }
 
     private animateTechnicalIntro() {
-        this.timeline.to(
-            ".technical-intro",
-            {
-                y: 0,
-                ease: this.EASE,
-            },
-            "<+0.05",
-        );
+        this.timeline.to(".technical-intro", {
+            y: 0,
+            ease: this.EASE,
+        }, "<+0.05")
     }
 
     private animateTechnicalEnter() {
-        this.timeline.from(
-            ".technical",
-            {
-                y: this.rect.height * 1.5,
-                ease: this.EASE,
-            },
-            "<",
-        );
+        this.timeline.from(".technical", {
+            y: this.rect.height * 1.5,
+            ease: this.EASE,
+        }, "<")
     }
 
     private animateBackground() {
-        this.timeline
-            .to(
-                ".technical-background",
-                {
-                    y: 0,
-                    width: this.rect.width,
-                    height: this.rect.height - this.HEADER_HEIGHT,
-                    borderRadius: 2,
-                    ease: "power4.in",
-                },
-                ">-0.3",
-            )
-            .to(
-                ".technical-intro .section-title",
-                {
-                    scale: 4,
-                    opacity: 0.5,
-                    ease: this.EASE,
-                },
-                "<+0.4",
-            );
+        this.timeline.to(".technical-background", {
+            y: 0,
+            width: this.rect.width,
+            height: this.rect.height - this.HEADER_HEIGHT,
+            borderRadius: 2,
+            ease: "power4.in",
+        }, ">-0.3").to(".technical-intro .section-title", {
+            scale: 4,
+            opacity: 0.5,
+            ease: this.EASE,
+        }, "<+0.4")
     }
 
     private animateCards() {
@@ -102,13 +73,12 @@ export class PageAnimation extends ElementBase {
                 y: 0,
                 rotate: 0,
                 scale: 1,
-                // ease: this.EASE,
                 duration: isPortrait ? 0.3 : 0.4,
                 ease: "circ.out",
-            },
-                isPortrait ? (index ? ">-0.2" : ">-0.4") : ">-0.4"
-            )
+            }, isPortrait ? (index ? ">-0.2" : ">-0.4") : ">-0.4")
+
             this.animateSkills(card)
+
             if (index < cards.length - 1) {
                 this.timeline.to(card, {
                     x: leave * -1,
@@ -127,73 +97,45 @@ export class PageAnimation extends ElementBase {
         Array.from(skills).forEach((skill) => {
             const offset = skill.dataset.offset;
 
-            this.timeline.to(
-                skill,
-                {
-                    strokeDashoffset: offset,
-                    // duration: 1.2,
-                    ease: "power1.in",
-                    // ease: this.EASE,
-                },
-                "<",
-            );
+            this.timeline.to(skill, {
+                strokeDashoffset: offset,
+                ease: "power1.in",
+            }, "<")
         });
     }
 
     private animateTechnicalLeave() {
-        this.timeline
-            .to(
-                ".technical",
-                {
-                    y: this.rect.height * -1,
-                    scale: 0.8,
-                    ease: "none",
-                },
-                ">",
-            )
-            .to(
-                ".technical-intro",
-                {
-                    y: this.rect.height * -1,
-                    ease: "power3.out",
-                },
-                "<",
-            );
+        this.timeline.to(".technical", {
+            y: this.rect.height * -1,
+            scale: 0.8,
+            ease: "none",
+        }, ">").to(".technical-intro", {
+            y: this.rect.height * -1,
+            ease: "power3.out",
+        }, "<")
     }
 
     private animateProjectsIntro() {
-        this.timeline.to(
-            ".projects-intro",
-            {
-                y: 0,
-                ease: this.EASE,
-            },
-            "<+0.1",
-        );
+        this.timeline.to(".projects-intro", {
+            y: 0,
+            ease: this.EASE,
+        }, "<+0.1")
     }
 
     private animateProjectsIntroLeave() {
-        this.timeline.to(
-            ".projects-intro .section-title",
-            {
-                y: this.rect.height * -0.2,
-                scale: 2,
-                ease: "power4.out",
-            },
-            ">+0.1",
-        );
+        this.timeline.to(".projects-intro .section-title", {
+            y: this.rect.height * -0.2,
+            scale: 2,
+            ease: "power4.out",
+        }, ">+0.1")
     }
 
     private animateProjectsEnter() {
-        this.timeline.to(
-            ".project-container",
-            {
-                y: 0,
-                scale: 1,
-                ease: this.EASE,
-            },
-            "<-0.4",
-        );
+        this.timeline.to(".project-container", {
+            y: 0,
+            scale: 1,
+            ease: this.EASE,
+        }, "<-0.4")
     }
 
     private animateFooterEnter() {
@@ -214,30 +156,22 @@ export class PageAnimation extends ElementBase {
     }
 
     private animateProjectLeave() {
-        this.timeline.to(
-            ".projects",
-            {
-                y: this.rect.height * -0.75,
-                ease: this.EASE,
-            },
-            ">-0.2",
-        )
+        this.timeline.to(".projects", {
+            y: this.rect.height * -0.75,
+            ease: this.EASE,
+        }, ">-0.2")
     }
 
     private animateContacts() {
         const a = this.$All(".contacts a")
         const links = new SplitType(a, { types: 'chars' })
 
-        this.timeline.to(
-            links.chars,
-            {
-                x: 0,
-                opacity: 1,
-                duration: 0.1,
-                ease: this.EASE,
-                stagger: 0.01,
-            },
-            ">-0.5",
-        )
+        this.timeline.to(links.chars, {
+            x: 0,
+            opacity: 1,
+            duration: 0.1,
+            ease: this.EASE,
+            stagger: 0.01,
+        }, ">-0.5")
     }
 }
