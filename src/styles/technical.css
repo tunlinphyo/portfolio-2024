@@ -84,7 +84,7 @@
             border-radius: 2px;
 
             translate: 100vmax 0;
-            rotate: 15deg;
+            rotate: 10deg;
             scale: .8;
 
             /* translate: 0 100vh;
@@ -97,6 +97,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
+
+            @media (min-width: 768px) {
+                rotate: 15deg;
+            }
 
             .card-layout {
                 inline-size: 100%;

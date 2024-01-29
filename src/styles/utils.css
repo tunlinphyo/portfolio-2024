@@ -66,13 +66,16 @@ body {
 
     .scroll-trigger {
         inline-size: 100%;
-        block-size: 1000vh;
-        /* block-size: 600vmin; */
+        block-size: 800vh;
 
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
         align-items: stretch;
+
+        @media (min-width: 768px) {
+            block-size: 1000vh;
+        }
 
         .top-trigger {
             inline-size: 100%;

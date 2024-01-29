@@ -10,7 +10,7 @@
 }
 
 .projects {
-    --block-start: 6vh;
+    --block-start: 0vh;
     --block-end: 0px;
     --border-color: var(--fg-accent-color);
 
@@ -62,7 +62,7 @@
 
             display: grid;
             grid-template-columns: minmax(0, 1fr);
-            grid-template-rows: minmax(0, 1fr) 60px;
+            grid-template-rows: minmax(0, 1fr) calc(120px + .5rem);
             padding: var(--x);
             gap: var(--x);
 
@@ -78,7 +78,7 @@
                 grid-template-columns: minmax(0, 1fr);
                 grid-template-rows: minmax(0, .5fr) minmax(0, 1fr);
                 grid-column: span 2;
-                gap: 1rem var(--x);
+                gap: 5vh var(--x);
 
                 @media (min-width: 992px) {
                     grid-template-columns: subgrid;
@@ -108,11 +108,12 @@
                 .project-end {
                     display: flex;
                     flex-direction: column;
-                    justify-content: center;
+                    justify-content: flex-start;
                     align-items: flex-start;
                     gap: 1rem;
 
                     @media (min-width: 768px) {
+                        justify-content: center;
                         gap: 1.5rem;
                     }
 
@@ -160,7 +161,9 @@
 
             .project-footer {
                 display: grid;
-                grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+                grid-template-columns: minmax(0, 1fr);
+                grid-template-rows: 60px 60px;
+                gap: .5rem 1rem;
                 grid-column: span 2;
 
                 @media (min-width: 992px) {
@@ -184,9 +187,13 @@
 
                 .controls {
                     display: flex;
-                    justify-content: flex-end;
+                    justify-content: space-between;
                     align-items: center;
                     gap: clamp(1rem, 2vw, 3rem);
+                    
+                    @media (min-width: 768px) {
+                        justify-content: flex-end;
+                    }
 
                     .control {
                         --icon-color: var(--fg-color);
@@ -215,7 +222,6 @@
                             z-index: 2;
                             width: 24px;
                             height: 24px;
-                            opacity: 0;
                         }
 
                         &::before {

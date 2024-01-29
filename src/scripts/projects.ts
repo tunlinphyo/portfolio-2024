@@ -13,7 +13,7 @@ export class ProjectsAnimation extends ElementBase {
         {
             id: 1,
             title: 'Yomiuri Shimbun',
-            category: 'E-commerce <br> &#10141; Ec-Cube 4.2',
+            category: 'E-commerce &#10141; Ec-Cube 4.2',
             description: `
                 Led a team in developing multiple websites for Yomiuri Shinbun using EC-Cube 4.2.
                 Designed a flexible database structure to support customer customization requests.
@@ -25,7 +25,7 @@ export class ProjectsAnimation extends ElementBase {
         {
             id: 2,
             title: 'CoreMobile',
-            category: 'Portfolio <br> &#10141; React, Next',
+            category: 'Portfolio &#10141; React, Next',
             description: `
                 Created a portfolio website for CoreMobile, which included the initial loading animation and scroll
                 animations using IntersectionObserver. Additionally, Trained junior developers to ensure that the
@@ -36,7 +36,7 @@ export class ProjectsAnimation extends ElementBase {
         {
             id: 3,
             title: 'United Arrows',
-            category: 'Apparel EC <br> &#10141; Vue, VueX',
+            category: 'Apparel EC &#10141; Vue, VueX',
             description: `
                 Fixed bugs, improved stability, and implemented new features for a Clothing simulation
                 web-app for United Arrows using Vue.js and Vuex. This involved addressing issues
@@ -46,7 +46,7 @@ export class ProjectsAnimation extends ElementBase {
         {
             id: 4,
             title: 'Shirt Simulation',
-            category: 'Coding <br> &#10141; Vue, Nuxt 3',
+            category: 'Coding &#10141; Vue, Nuxt 3',
             description: `
                 A sample website for Shirt Simulation using Nuxt 3. Created custom plugins (
                 <a href="https://shirt-simulation.vercel.app/document/toasts" target="_blank">Toast,</a>
@@ -60,7 +60,7 @@ export class ProjectsAnimation extends ElementBase {
         {
             id: 5,
             title: 'Inhouse Furniture',
-            category: 'E-commerce <br> &#10141; Svelte',
+            category: 'E-commerce &#10141; Svelte',
             description: `
                 Created the project structure using Sapper (The predecessor of SvelteKit) and implemented APIs with the backend.
                 The website was made responsive for all devices based on the UI design from the UI/UX team.
