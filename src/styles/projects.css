@@ -138,6 +138,12 @@
     
                     > label {
                         display: inline-block;
+
+                        > br {
+                            @media (min-width: 768px) {
+                                display: none;
+                            }
+                        }
                     }
                 }
     
@@ -174,6 +180,7 @@
                             z-index: 2;
                             width: 24px;
                             height: 24px;
+                            opacity: 0;
                         }
     
                         &::before {
@@ -196,6 +203,10 @@
                             &::before {
                                 inset: 2px;
                                 background-color: var(--border-color);
+                            }
+
+                            > svg {
+                                opacity: 1!important;
                             }
                         }
                     }

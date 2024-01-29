@@ -202,7 +202,10 @@ export class PageAnimation extends ElementBase {
         }, {
             background: "conic-gradient(var(--fill-color) 100%, var(--stoke-color) 0)",
             duration: 0.3,
-        }, ">+0.1").to(".footer",
+        }, ">+0.1").to(".control svg", {
+            opacity: 1,
+            duration: 0.2,
+        }, ">-0.2").to(".footer",
         {
             y: 0,
             scale: 1,
