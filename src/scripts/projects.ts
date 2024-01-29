@@ -240,16 +240,16 @@ export class ProjectsAnimation extends ElementBase {
             opacity: 1,
             x: 0,
             duration: 0.4,
-            onComplete: () => {
-                controls.classList.remove("disabled")
-                this.animating = false
-            },
         }).fromTo(description, {
             opacity: 0,
             y: 50,
         }, {
             opacity: 1,
             y: 0,
+            onComplete: () => {
+                controls.classList.remove("disabled")
+                this.animating = false
+            },
         }, ">")
 
         if (this.project.url) {

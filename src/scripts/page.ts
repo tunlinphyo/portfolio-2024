@@ -147,8 +147,7 @@ export class PageAnimation extends ElementBase {
         }, ">+0.1").to(".control svg", {
             opacity: 1,
             duration: 0.2,
-        }, ">-0.2").to(".footer",
-        {
+        }, ">-0.2").to(".footer", {
             y: 0,
             scale: 1,
             ease: this.EASE,
@@ -156,10 +155,15 @@ export class PageAnimation extends ElementBase {
     }
 
     private animateProjectLeave() {
+        const isLarge = this.matchMedia("(min-width: 992px)")
+
         this.timeline.to(".projects", {
             y: this.rect.height * -0.75,
             ease: this.EASE,
-        }, ">-0.2")
+        }, ">-0.2").to(".footer-title", {
+            scale: isLarge ? 1.8 : 1.5,
+            // ease: "power4.out",
+        }, "<+0.2")
     }
 
     private animateContacts() {

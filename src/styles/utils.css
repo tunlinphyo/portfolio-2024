@@ -375,7 +375,7 @@ body {
     align-items: center;
 
     @media (min-width: 768px) {
-        --size: 200px;
+        --icon-size: 140px;
     }
 
     > svg {

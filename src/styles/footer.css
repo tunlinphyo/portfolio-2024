@@ -57,7 +57,7 @@
                         display: inline-block;
                         color: var(--fg-color);
                         text-decoration: none;
-    
+
                         &:hover {
                             color: var(--accent-color);
                         }
@@ -79,6 +79,6 @@
         font-weight: 800;
         text-transform: uppercase;
         text-align: center;
-        padding-inline: var(--x);
+        padding-inline: var(--dx);
     }
 }
