@@ -100,7 +100,15 @@
         }
 
         .button {
+            --icon-color: var(--fg-color);
+
             pointer-events: auto;
+            cursor: pointer;
+            
+            border: none;
+            outline: none;
+            padding: 0;
+            background-color: transparent;
 
             width: 30px;
             height: 30px;
@@ -118,6 +126,10 @@
             &:first-child > svg {
                 width: 23px;
                 height: 23px;
+            }
+
+            &:hover {
+                --icon-color: var(--accent-color);
             }
         }
     }

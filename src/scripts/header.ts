@@ -19,12 +19,21 @@ export class HeaderAnimation extends ElementBase {
     }
 
     private subscribe() {
+        const toggleTheme = this.$(".toggle-blueprint", document)
+
         this.$(".contact-me .mouse", document).addEventListener("click", () => {
             this.gotoContact()
         })
 
         this.$(".goto-top .mouse", document).addEventListener("click", () => {
             this.gotoTop()
+        })
+
+        toggleTheme.addEventListener("click", () => {
+            document.body.classList.toggle("blueprint")
+            const has = !!document.body.classList.contains("blueprint")
+            console.log(has)
+            toggleTheme.dataset.popup = has ? "Blueprint Off" : "Blueprint On"
         })
     }
 

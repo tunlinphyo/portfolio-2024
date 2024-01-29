@@ -12,4 +12,4 @@
 @import url(./styles/projects.css) layer(component);
 @import url(./styles/footer.css) layer(component);
 
-/* @import url(./styles/blueprint.css) layer(blueprint); */
+@import url(./styles/blueprint.css) layer(blueprint);
