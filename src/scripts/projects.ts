@@ -24,7 +24,7 @@ export class ProjectsAnimation extends ElementBase {
         },
         {
             id: 2,
-            title: 'Core Mobile',
+            title: 'CoreMobile',
             category: 'Portfolio &#10141; React, Next',
             description: `
                 Created a portfolio website for CoreMobile, which included the initial loading animation and scroll
@@ -80,7 +80,7 @@ export class ProjectsAnimation extends ElementBase {
         this.subscribe()
     }
 
-    get rect() {
+    get projectRect() {
         return this.$(".project").getBoundingClientRect()
     }
 
@@ -138,10 +138,7 @@ export class ProjectsAnimation extends ElementBase {
                     iframe.classList.add("ready")
                 }
             }
-        }).fromTo(".close-website", {
-            y: 200,
-            opacity: 0,
-        }, {
+        }).to(".close-website", {
             y: 0,
             opacity: 1,
             duration: 1,
@@ -156,10 +153,7 @@ export class ProjectsAnimation extends ElementBase {
 
         this.enableScroll()
 
-        timeline.fromTo(".close-website", {
-            y: 0,
-            opacity: 1,
-        }, {
+        timeline.to(".close-website", {
             y: 200,
             opacity: 0,
             duration: 0.7,
@@ -167,11 +161,7 @@ export class ProjectsAnimation extends ElementBase {
             onComplete: () => {
                 iframe.src = ''
             }
-        }).fromTo(".iframe-container", {
-            y: 0,
-            opacity: 1,
-        }, {
-            y: 0,
+        }).to(".iframe-container", {
             opacity: 0,
             ease: this.EASE,
             onComplete: () => {
@@ -194,73 +184,106 @@ export class ProjectsAnimation extends ElementBase {
             this.index = this.currentIndex + 1
         }
 
-        const title = this.$(".project h3")
         const label = this.$(".project-footer label")
-        const description = this.$(".project-end p")
         const controls = this.$(".projects .controls")
-        const btnOpen = this.$(".open-website")
 
         const timeline = this.gsap.timeline()
 
-        const fromPrev = {
-            opacity: 0,
-            x: Math.min(-100, this.rect.width * -0.2),
-        }
-        const fromNext = {
-            opacity: 0,
-            x: Math.max(100, this.rect.width * 0.2),
-        }
+        const leave = isNext ? -1 : 1
+        const enter = isNext ? 1 : -1
 
         controls.classList.add("disabled")
         this.animating = true
 
-        timeline.fromTo([title, label], {
-            opacity: 1,
-            x: 0,
-        }, {
-            opacity: 0,
-            x: isNext ? this.rect.width * -0.2 : this.rect.width * 0.2,
-            ease: "power4.in",
-            onComplete: () => {
-                this.renderData()
-            },
-        }).fromTo(description, {
-            opacity: 1,
-            y: 0,
-        }, {
-            opacity: 0,
-            y: 0,
-        }, "<").to(btnOpen, {
-            opacity: 0,
-            y: 0,
-        }, "<")
+        const media = this.withMedia()
 
-        timeline.fromTo([title, label],
-            isNext ? fromNext : fromPrev, {
-            opacity: 1,
-            x: 0,
-            duration: 0.4,
-        }).fromTo(description, {
-            opacity: 0,
-            y: 50,
-        }, {
-            opacity: 1,
-            y: 0,
-            onComplete: () => {
-                controls.classList.remove("disabled")
-                this.animating = false
-            },
-        }, ">")
+        media.add("(max-width: 991px)", () => {
+            const project = this.$(".projects .project")
+            const width = this.projectRect.width * 0.5
 
-        if (this.project.url) {
-            timeline.fromTo(btnOpen, {
+            timeline.fromTo([project, label], {
+                opacity: 1,
+                x: 0,
+            }, {
+                opacity: 0,
+                x: width * leave,
+                ease: "power2.in",
+                onComplete: () => {
+                    this.renderData()
+                },
+            })
+
+            timeline.fromTo([project, label], {
+                opacity: 0,
+                x: width * enter,
+            }, {
+                opacity: 1,
+                x: 0,
+                duration: 0.4,
+                ease: "power1.out",
+                onComplete: () => {
+                    controls.classList.remove("disabled")
+                    this.animating = false
+                },
+            })
+        })
+
+        media.add("(min-width: 992px)", () => {
+            const width = this.projectRect.width * 0.25
+            const title = this.$(".project h3")
+            const description = this.$(".project-end p")
+            const btnOpen = this.$(".open-website")
+
+            timeline.fromTo([title, label], {
+                opacity: 1,
+                x: 0,
+            }, {
+                opacity: 0,
+                x: width * leave,
+                ease: "power4.in",
+                onComplete: () => {
+                    this.renderData()
+                },
+            }).fromTo(description, {
+                opacity: 1,
+                y: 0,
+            }, {
+                opacity: 0,
+                y: 0,
+            }, "<").to(btnOpen, {
+                opacity: 0,
+                y: 0,
+            }, "<")
+
+            timeline.fromTo([title, label], {
+                opacity: 0,
+                x: width * enter,
+            }, {
+                opacity: 1,
+                x: 0,
+                duration: 0.4,
+            }).fromTo(description, {
                 opacity: 0,
                 y: 50,
             }, {
                 opacity: 1,
                 y: 0,
-            }, "<+0.1")
-        }
+                onComplete: () => {
+                    controls.classList.remove("disabled")
+                    this.animating = false
+                },
+            }, ">")
+
+            if (this.project.url) {
+                timeline.fromTo(btnOpen, {
+                    opacity: 0,
+                    y: 50,
+                }, {
+                    opacity: 1,
+                    y: 0,
+                }, "<+0.1")
+            }
+        })
     }
 
     private renderData() {

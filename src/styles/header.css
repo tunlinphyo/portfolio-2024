@@ -58,6 +58,7 @@
                 top: 100%;
                 max-width: 600px;
                 transform: translateY(10%);
+                pointer-events: none;
 
                 @media (max-width: 599px) {
                     transform: translateY(20%);
@@ -80,9 +81,9 @@
 
     inline-size: 100%;
     block-size: var(--header-height);
-    
+
     pointer-events: none;
-    
+
     .buttons {
         inline-size: 100%;
         max-inline-size: var(--max-width);
@@ -104,7 +105,7 @@
 
             pointer-events: auto;
             cursor: pointer;
-            
+
             border: none;
             outline: none;
             padding: 0;
@@ -133,4 +134,8 @@
             }
         }
     }
+}
+
+.contact-me {
+    bottom: calc(var(--x) + 10px);
 }

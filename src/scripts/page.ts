@@ -43,8 +43,8 @@ export class PageAnimation extends ElementBase {
     }
 
     private animateTechnicalEnter() {
-        this.timeline.from(".technical", {
-            y: this.rect.height * 1.5,
+        this.timeline.to(".technical", {
+            y: 0,
             ease: this.EASE,
         }, "<")
     }
@@ -56,7 +56,7 @@ export class PageAnimation extends ElementBase {
                 width: this.rect.width,
                 height: this.rect.height - this.HEADER_HEIGHT,
                 borderRadius: 2,
-                ease: "power4.in",
+                ease: "power3.in",
             }, ">-0.3")
         })
         media.add("(min-width: 768px)", () => {
@@ -83,19 +83,14 @@ export class PageAnimation extends ElementBase {
             Array.from(cards).forEach((card, index) => {
                 this.timeline.to(card, {
                     x: 0,
-                    y: 0,
-                    rotate: 0,
                     scale: 1,
                     ease: "power1.out",
-                }, index ? ">-0.5" : ">-0.15")
-    
-                this.animateSkills(card, true)
-    
+                }, index ? "<" : ">-0.15")
+
                 if (index < cards.length - 1) {
                     this.timeline.to(card, {
                         x: leave * -1,
-                        rotate: -10,
-                        scale: 0.8,
+                        scale: 0.5,
                         ease: "power1.in",
                     }, ">")
                 }
@@ -111,9 +106,9 @@ export class PageAnimation extends ElementBase {
                     duration: isPortrait ? 0.3 : 0.4,
                     ease: "circ.out",
                 }, isPortrait ? (index ? ">-0.2" : ">-0.4") : ">-0.4")
-    
-                this.animateSkills(card, false)
-    
+
+                this.animateSkills(card)
+
                 if (index < cards.length - 1) {
                     this.timeline.to(card, {
                         x: leave * -1,
@@ -128,19 +123,14 @@ export class PageAnimation extends ElementBase {
 
     }
 
-    private animateSkills(elem: HTMLElement, isSmall: boolean) {
-        const skills = this.$All(".skill-svg", elem);
+    private animateSkills(elem: HTMLElement) {
+        const skills = this.$All(".skill-circle", elem)
 
         Array.from(skills).forEach((skill) => {
-            const offset = skill.dataset.offset;
-            if (isSmall) {
-                skill.style.strokeDashoffset = `${offset}`
-            } else {
-                this.timeline.to(skill, {
-                    strokeDashoffset: offset,
-                    ease: "power1.in",
-                }, "<")
-            }
+            this.timeline.from(skill, {
+                background: "conic-gradient(var(--fill-color) 0%, var(--stoke-color) 0)",
+                ease: "power1.in",
+            }, "<")
         });
     }
 
@@ -195,7 +185,7 @@ export class PageAnimation extends ElementBase {
             background: "conic-gradient(var(--fill-color) 0%, var(--stoke-color) 0)",
         }, {
             background: "conic-gradient(var(--fill-color) 100%, var(--stoke-color) 0)",
-            duration: 0.3,
+            duration: 0.4,
         }, ">+0.1").from(".control svg", {
             opacity: 0,
             duration: 0.2,
@@ -236,7 +226,7 @@ export class PageAnimation extends ElementBase {
         })
         media.add("(min-width: 992px)", () => {
             const links = new SplitType(a, { types: 'chars' })
-    
+
             this.timeline.to(links.chars, {
                 x: 0,
                 opacity: 1,

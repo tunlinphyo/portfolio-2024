@@ -10,7 +10,7 @@ export class HeaderAnimation extends ElementBase {
     protected init(): void {
         const mouse = this.animateMouse()
         this.textEffect().then(() => {
-            if (window.scrollY < 2) mouse.play()
+            if (window.scrollY < 10) mouse.play()
             this.played = true
         })
         this.animateButtons()
@@ -29,10 +29,13 @@ export class HeaderAnimation extends ElementBase {
             this.gotoTop()
         })
 
+        this.$(".header .header-name", document).addEventListener("click", () => {
+            this.gotoTop()
+        })
+
         toggleTheme.addEventListener("click", () => {
             document.body.classList.toggle("blueprint")
             const has = !!document.body.classList.contains("blueprint")
-            console.log(has)
             toggleTheme.dataset.popup = has ? "Blueprint On" : "Blueprint Off"
         })
     }
@@ -93,33 +96,40 @@ export class HeaderAnimation extends ElementBase {
     }
 
     private textEffect(): Promise<true> {
-        const hello = new SplitType('.header .hello', { types: 'chars' })
-        const heading = new SplitType('.header-name', { types: 'chars' })
-        const intro = new SplitType('.header .intro', { types: 'words' })
+        const media = this.withMedia()
 
         return new Promise((resolve) => {
-            const timeline = this.gsap.timeline()
+            media.add("(max-width: 767px)", () => {
+                setTimeout(() => {
+                    resolve(true)
+                })
+            })
+            media.add("(min-width: 768px)", () => {
+                const hello = new SplitType('.header .hello', { types: 'chars' })
+                const heading = new SplitType('.header-name', { types: 'chars' })
+                const intro = new SplitType('.header .intro', { types: 'words' })
+                const timeline = this.gsap.timeline()
 
-            timeline.to([
+                timeline.to([
                     ...hello.chars as HTMLElement[],
                     ...heading.chars as HTMLElement[],
                 ], {
-                x: 0,
-                y: 0,
-                opacity: 1,
-                scale: 1,
-                ease: "power4.in",
-                stagger: 0.03,
-            }).to(intro.words, {
-                x: 0,
-                y: 0,
-                opacity: 1,
-                scale: 1,
-                ease: this.EASE,
-                stagger: 0.02,
-                onComplete: () => {
-                    resolve(true)
-                }
+                    x: 0,
+                    opacity: 1,
+                    scale: 1,
+                    ease: "power4.in",
+                    stagger: 0.03,
+                }).to(intro.words, {
+                    x: 0,
+                    y: 0,
+                    opacity: 1,
+                    scale: 1,
+                    ease: this.EASE,
+                    stagger: 0.02,
+                    onComplete: () => {
+                        resolve(true)
+                    }
+                })
             })
         })
     }

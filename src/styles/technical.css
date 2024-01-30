@@ -13,6 +13,9 @@
     --size: 160px;
     --icon-color: var(--fg-color);
 
+    pointer-events: none;
+    overflow: hidden;
+
     position: fixed;
     z-index: 1;
     inset: 0;
@@ -22,6 +25,8 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
+
+    translate: 0 150vh;
 
     @media (min-width: 768px) {
         --size: 200px;
@@ -47,14 +52,11 @@
         backdrop-filter: saturate(180%) blur(10px);
         -webkit-backdrop-filter: saturate(180%) blur(10px);
 
-        translate: 0 48vh;
-        @media (min-width: 768px) {
-            translate: 0 40vh;
-        }
-
         display: flex;
         justify-content: center;
         align-items: center;
+
+        translate: 0 40vh;
 
         > svg {
             width: calc(var(--size) * 0.555);
@@ -65,15 +67,21 @@
 
     .technical-cards {
         position: absolute;
-        z-index: 1;
+        z-index: 2;
         inset: 0;
+        overflow: hidden;
+        height: calc(100vh - var(--header-height));
 
         display: flex;
         justify-content: center;
         align-items: center;
 
+        overflow: hidden;
+
         .technical-card {
             position: absolute;
+            pointer-events: auto;
+            will-change: transform;
 
             inline-size: calc(100vw - var(--x));
             max-inline-size: 650px;
@@ -84,8 +92,8 @@
             border-radius: 2px;
 
             translate: 100vmax 0;
-            rotate: 10deg;
-            scale: .8;
+            /* rotate: 10deg; */
+            scale: .5;
 
             /* translate: 0 100vh;
             scale: .8; */
@@ -100,6 +108,7 @@
 
             @media (min-width: 768px) {
                 rotate: 15deg;
+                scale: .8;
             }
 
             .card-layout {
@@ -144,6 +153,62 @@
 
                         .skill {
                             .skill-circle {
+                                --size: 80px;
+                                --stoke-color: transparent;
+                                --fill-color: var(--accent-color);
+                                --skill: 0%;
+
+                                inline-size: var(--size);
+                                block-size: var(--size);
+                                border-radius: 50%;
+                                background: conic-gradient(var(--fill-color) var(--skill, 0%), var(--stoke-color) 0);
+                                padding: 4px;
+
+                                &[data-skill="40"] {
+                                    --skill: 40%;
+                                }
+                                &[data-skill="50"] {
+                                    --skill: 50%;
+                                }
+                                &[data-skill="55"] {
+                                    --skill: 55%;
+                                }
+                                &[data-skill="65"] {
+                                    --skill: 65%;
+                                }
+                                &[data-skill="75"] {
+                                    --skill: 75%;
+                                }
+                                &[data-skill="80"] {
+                                    --skill: 80%;
+                                }
+                                &[data-skill="88"] {
+                                    --skill: 88%;
+                                }
+                                &[data-skill="92"] {
+                                    --skill: 92%;
+                                }
+                                &[data-skill="94"] {
+                                    --skill: 94%;
+                                }
+                                &[data-skill="98"] {
+                                    --skill: 98%;
+                                }
+
+                                > label {
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    text-align: center;
+
+                                    inline-size: 100%;
+                                    block-size: 100%;
+                                    border-radius: 50%;
+                                    background-color: var(--bg-color);
+                                    font-size: .75rem;
+                                }
+                            }
+                            /* .skill-circle {
                                 position: relative;
                                 display: flex;
                                 justify-content: center;
@@ -159,7 +224,7 @@
                                 > svg {
                                     transform: rotate(-90deg);
                                 }
-                            }
+                            } */
                         }
                     }
                 }
