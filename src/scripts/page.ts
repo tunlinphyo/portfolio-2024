@@ -207,13 +207,13 @@ export class PageAnimation extends ElementBase {
     }
 
     private animateProjectLeave(media: gsap.MatchMedia) {
-        media.add("(max-width: 767px)", () => {
+        media.add("(max-width: 991px)", () => {
             this.timeline.to(".projects", {
                 y: this.rect.height * -0.75,
                 ease: this.EASE,
             }, ">-0.2")
         })
-        media.add("(min-width: 768px)", () => {
+        media.add("(min-width: 992px)", () => {
             this.timeline.to(".projects", {
                 y: this.rect.height * -0.75,
                 ease: this.EASE,
@@ -226,7 +226,7 @@ export class PageAnimation extends ElementBase {
     private animateContacts(media: gsap.MatchMedia) {
         const a = this.$All(".contacts a")
 
-        media.add("(max-width: 767px)", () => {
+        media.add("(max-width: 991px)", () => {
             this.timeline.from(a, {
                 x: 40,
                 opacity: 0,
@@ -234,7 +234,7 @@ export class PageAnimation extends ElementBase {
                 stagger: 0.05,
             }, ">-0.4")
         })
-        media.add("(min-width: 768px)", () => {
+        media.add("(min-width: 992px)", () => {
             const links = new SplitType(a, { types: 'chars' })
     
             this.timeline.to(links.chars, {

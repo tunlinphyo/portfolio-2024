@@ -24,7 +24,7 @@ export class ProjectsAnimation extends ElementBase {
         },
         {
             id: 2,
-            title: 'CoreMobile',
+            title: 'Core Mobile',
             category: 'Portfolio &#10141; React, Next',
             description: `
                 Created a portfolio website for CoreMobile, which included the initial loading animation and scroll
@@ -45,7 +45,7 @@ export class ProjectsAnimation extends ElementBase {
         },
         {
             id: 4,
-            title: 'Shirt Simulation',
+            title: 'Shirt Simulator',
             category: 'Coding &#10141; Vue, Nuxt 3',
             description: `
                 A sample website for Shirt Simulation using Nuxt 3. Created custom plugins (
