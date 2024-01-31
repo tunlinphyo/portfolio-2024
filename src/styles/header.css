@@ -28,6 +28,7 @@
                 font-weight: 900;
                 line-height: 1.25;
                 margin: 0;
+                will-change: font-size;
 
                 .char {
                     opacity: 0;

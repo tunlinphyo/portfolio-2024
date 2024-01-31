@@ -116,6 +116,9 @@
                         @media (min-width: 768px) {
                             -webkit-text-stroke-width: 3px;
                         } */
+                        @media (min-width: 992px) {
+                            font-size: clamp(3rem, 7vw, 7rem);
+                        }
                     }
                 }
 
