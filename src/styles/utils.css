@@ -99,7 +99,7 @@ body {
         .mouse {
             inline-size: 30px;
             block-size: 42px;
-            border: 2px solid var(--border-color);
+            border: 2px solid var(--mouse-color);
             border-radius: 20px;
 
             background-color: var(--bg-dark-color);

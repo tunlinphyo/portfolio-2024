@@ -24,7 +24,7 @@
             position: relative;
 
             .header-name {
-                font-size: clamp(3rem, 12vw, 11rem);
+                font-size: clamp(2.8rem, 12vw, 11rem);
                 font-weight: 900;
                 line-height: 1.25;
                 margin: 0;

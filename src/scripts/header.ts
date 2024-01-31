@@ -64,7 +64,7 @@ export default class HeaderAnimation extends BaseElement {
             scaleX: 1,
         }).to(window, {
             duration: 0,
-            scrollTo: ".top-trigger",
+            scrollTo: { y: ".top-trigger" },
         }).fromTo(".jumper svg", {
             scale: 0,
             opacity: 1,

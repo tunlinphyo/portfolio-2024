@@ -29,7 +29,7 @@
     padding-block-start: var(--block-start);
     padding-block-end: var(--block-end);
 
-    @media (min-width: 992px) {
+    @media (min-width: 768px) and (min-height: 768px) {
         --block-start: 10vh;
         --block-end: 0px;
     }
@@ -93,9 +93,12 @@
 
                 @media (min-width: 992px) {
                     display: grid;
-                    grid-template-columns: minmax(0, 2fr) minmax(0, 480px);
+                    grid-template-columns: minmax(0, 2fr) minmax(0, 400px);
                     grid-template-rows: minmax(0, 1fr);
                     gap: var(--x);
+                }
+                @media (min-width: 1200px) {
+                    grid-template-columns: minmax(0, 2fr) minmax(0, 480px);
                 }
 
                 .project-start {
@@ -187,7 +190,7 @@
                 display: grid;
                 grid-template-columns: minmax(0, 1fr);
                 grid-template-rows: 60px 60px;
-                gap: .5rem 1rem;
+                gap: .5rem 2rem;
                 /* grid-column: span 2; */
 
                 @media (min-width: 768px) {
@@ -196,8 +199,11 @@
                 }
 
                 @media (min-width: 992px) {
-                    grid-template-columns: minmax(0, 2fr) minmax(0, 480px);
+                    grid-template-columns: minmax(0, 2fr) minmax(0, 400px);
                     gap: var(--x);
+                }
+                @media (min-width: 1200px) {
+                    grid-template-columns: minmax(0, 2fr) minmax(0, 480px);
                 }
 
                 .decoration {
