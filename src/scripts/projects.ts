@@ -62,10 +62,9 @@ export class ProjectsAnimation extends ElementBase {
             title: 'Inhouse Furniture',
             category: 'E-commerce &#10141; Svelte',
             description: `
-                Created the project structure using Sapper (The predecessor of SvelteKit) and implemented APIs with the backend.
-                The website was made responsive for all devices based on the UI design from the UI/UX team.
-                Since the design team only provided desktop UI, I redesigned it for other views, such as mobile and tablet,
-                ensuring a visually appealing and user-friendly experience across all screens.
+                Structured the project using Sapper (predecessor of SvelteKit) and implemented APIs with the backend. 
+                Ensured website responsiveness across devices by adapting the UI design for desktop, redesigning for mobile 
+                and tablet views, ensuring a visually pleasing and user-friendly experience on all screens.
             `,
             url: 'https://inhousemm.com/'
         }
