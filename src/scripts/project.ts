@@ -1,4 +1,9 @@
-import { ElementBase } from "./base"
+import { MEDIA } from "./helpers/const"
+import BaseElement from "./helpers/element"
+import Timeline from "./timeline"
+import { elem } from "./helpers/utils"
+import disableScroll from "./helpers/disabled-scroll"
+import gsap from "./helpers/gsap"
 
 interface Project {
     id: number;
@@ -8,7 +13,7 @@ interface Project {
     url?: string;
 }
 
-export class ProjectsAnimation extends ElementBase {
+export default class ProjectsAnimation extends BaseElement {
     protected readonly projects: Project[] = [
         {
             id: 1,
@@ -62,8 +67,8 @@ export class ProjectsAnimation extends ElementBase {
             title: 'Inhouse Furniture',
             category: 'E-commerce &#10141; Svelte',
             description: `
-                Structured the project using Sapper (predecessor of SvelteKit) and implemented APIs with the backend. 
-                Ensured website responsiveness across devices by adapting the UI design for desktop, redesigning for mobile 
+                Structured the project using Sapper (predecessor of SvelteKit) and implemented APIs with the backend.
+                Ensured website responsiveness across devices by adapting the UI design for desktop, redesigning for mobile
                 and tablet views, ensuring a visually pleasing and user-friendly experience on all screens.
             `,
             url: 'https://inhousemm.com/'
@@ -71,16 +76,19 @@ export class ProjectsAnimation extends ElementBase {
     ]
     protected currentIndex: number = 0
     protected animating: boolean = false
-    constructor(readonly selector: string) {
-        super(selector)
-    }
+    constructor(private readonly main: Timeline) {
+        super()
 
-    protected init(): void {
+        this.animateEnter()
+        this.animateProjectsIntroLeave()
+        this.animateProjectsEnter()
+        this.animateControls()
+        this.animateProjectLeave()
         this.subscribe()
     }
 
     get projectRect() {
-        return this.$(".project").getBoundingClientRect()
+        return elem(".project").getBoundingClientRect()
     }
 
     get project() {
@@ -96,31 +104,92 @@ export class ProjectsAnimation extends ElementBase {
     }
 
     private subscribe() {
-        const btnOpen = this.$(".open-website")
-        this.$(".control.previous").addEventListener("click", () => {
+        const btnOpen = elem(".open-website")
+        elem(".control.previous").addEventListener("click", () => {
             this.renderProject("previous")
         })
-        this.$(".control.next").addEventListener("click", () => {
+        elem(".control.next").addEventListener("click", () => {
             this.renderProject("next")
         })
         btnOpen.addEventListener("click", () => {
             const url = btnOpen.dataset.url
             this.openWebsite(url)
         })
-        this.$(".close-website", document).addEventListener("click", () => {
+        elem(".close-website").addEventListener("click", () => {
             this.closeWebsite()
+        })
+    }
+
+    private animateEnter() {
+        this.main.timeline.to(".projects-intro", {
+            y: 0,
+        }, "<+0.1")
+    }
+
+    private animateProjectsIntroLeave() {
+        this.main.media.add(MEDIA.MediumAndLarge, () => {
+            this.main.timeline.to(".projects-intro .section-title", {
+                y: this.rect.height * -0.2,
+                scale: 2,
+                ease: "power4.out",
+            }, ">+0.1")
+        })
+    }
+
+    private animateProjectsEnter() {
+        this.main.media.add(MEDIA.SmallOnly, () => {
+            this.main.timeline.to(".project-container", {
+                y: 0,
+                scale: 1,
+                duration: 0.6,
+            }, "<+0.3")
+        })
+        this.main.media.add(MEDIA.MediumAndLarge, () => {
+            this.main.timeline.to(".project-container", {
+                y: 0,
+                scale: 1,
+            }, "<-0.4")
+        })
+    }
+
+    private animateControls() {
+        this.main.timeline.fromTo(".control", {
+            background: "conic-gradient(var(--fill-color) 0%, var(--stoke-color) 0)",
+        }, {
+            background: "conic-gradient(var(--fill-color) 100%, var(--stoke-color) 0)",
+        }, ">+0.1").from(".control svg", {
+            opacity: 0,
+            duration: 0.2,
+        }, ">-0.2").to(".footer", {
+            y: 0,
+            scale: 1,
+        }, "<+0.1")
+    }
+
+    private animateProjectLeave() {
+        this.main.media.add(MEDIA.SamllAndMedium, () => {
+            this.main.timeline.to(".projects", {
+                y: this.rect.height * -0.75,
+            }, ">-0.2")
+        })
+        this.main.media.add(MEDIA.LargeOnly, () => {
+            this.main.timeline.to(".projects", {
+                y: this.rect.height * -0.75,
+            }, ">-0.2").to(".footer-title", {
+                scale: 1.8,
+            }, "<+0.2")
         })
     }
 
     private openWebsite(url?: string) {
         if (!url) return
-        const iframeContainer = this.$(".iframe-container", document)
-        const iframe = this.$<HTMLIFrameElement>(".iframe", iframeContainer)
+        const iframeContainer = elem(".iframe-container")
+        const iframe = elem<HTMLIFrameElement>(".iframe", iframeContainer)
 
         iframeContainer.classList.add("opened")
-        const timeline = this.gsap.timeline()
+        const timeline = gsap.timeline()
 
-        this.disableScroll()
+        disableScroll.on()
 
         timeline.fromTo(".iframe-container", {
             y: window.innerHeight,
@@ -146,11 +215,11 @@ export class ProjectsAnimation extends ElementBase {
     }
 
     private closeWebsite() {
-        const iframeContainer = this.$(".iframe-container", document)
-        const iframe = this.$<HTMLIFrameElement>(".iframe", iframeContainer)
-        const timeline = this.gsap.timeline()
+        const iframeContainer = elem(".iframe-container")
+        const iframe = elem<HTMLIFrameElement>(".iframe", iframeContainer)
+        const timeline = gsap.timeline()
 
-        this.enableScroll()
+        disableScroll.off()
 
         timeline.to(".close-website", {
             y: 200,
@@ -162,7 +231,6 @@ export class ProjectsAnimation extends ElementBase {
             }
         }).to(".iframe-container", {
             opacity: 0,
-            ease: this.EASE,
             onComplete: () => {
                 iframeContainer.classList.remove("opened")
                 iframe.classList.remove("ready")
@@ -183,10 +251,10 @@ export class ProjectsAnimation extends ElementBase {
             this.index = this.currentIndex + 1
         }
 
-        const label = this.$(".project-footer label")
-        const controls = this.$(".projects .controls")
+        const label = elem(".project-footer label")
+        const controls = elem(".projects .controls")
 
-        const timeline = this.gsap.timeline()
+        const timeline = gsap.timeline()
 
         const leave = isNext ? -1 : 1
         const enter = isNext ? 1 : -1
@@ -194,10 +262,8 @@ export class ProjectsAnimation extends ElementBase {
         controls.classList.add("disabled")
         this.animating = true
 
-        const media = this.withMedia()
-
-        media.add("(max-width: 991px)", () => {
-            const project = this.$(".projects .project")
+        this.main.media.add(MEDIA.SamllAndMedium, () => {
+            const project = elem(".projects .project")
             const width = this.projectRect.width * 0.5
 
             timeline.fromTo([project, label], {
@@ -227,11 +293,11 @@ export class ProjectsAnimation extends ElementBase {
             })
         })
 
-        media.add("(min-width: 992px)", () => {
+        this.main.media.add(MEDIA.LargeOnly, () => {
             const width = this.projectRect.width * 0.25
-            const title = this.$(".project h3")
-            const description = this.$(".project-end p")
-            const btnOpen = this.$(".open-website")
+            const title = elem(".project h3")
+            const description = elem(".project-end p")
+            const btnOpen = elem(".open-website")
 
             timeline.fromTo([title, label], {
                 opacity: 1,
@@ -286,16 +352,16 @@ export class ProjectsAnimation extends ElementBase {
     }
 
     private renderData() {
-        const title = this.$(".project h3")
-        const label = this.$(".project-footer label")
-        const description = this.$(".project-end p")
-        const btnOpen = this.$(".open-website")
+        const title = elem(".project h3")
+        const label = elem(".project-footer label")
+        const description = elem(".project-end p")
+        const btnOpen = elem(".open-website")
 
         title.textContent = this.project.title
         label.innerHTML = this.project.category
         description.innerHTML = this.project.description
         btnOpen.dataset.url = this.project.url || ''
-        this.$(".project-end").classList.toggle("with-button", !!this.project.url)
+        elem(".project-end").classList.toggle("with-button", !!this.project.url)
         btnOpen.style.display = this.project.url ? "flex" : "none"
     }
 }

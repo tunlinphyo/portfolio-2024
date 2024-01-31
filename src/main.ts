@@ -1,10 +1,14 @@
-import { HeaderAnimation } from './scripts/header'
-import { PageAnimation } from './scripts/page'
-import { ProjectsAnimation } from './scripts/projects'
 import './style.css'
+import Timeline from './scripts/timeline'
+import HeaderAnimation from "./scripts/header"
+import TechnicalAnimation from './scripts/technical'
+import ProjectsAnimation from './scripts/project'
+import FooterAnimation from './scripts/footer'
 
 window.onload = () => {
-    new PageAnimation('.main')
-    new HeaderAnimation('.header')
-    new ProjectsAnimation(".projects")
+    const timeline = new Timeline()
+    new HeaderAnimation(timeline)
+    new TechnicalAnimation(timeline)
+    new ProjectsAnimation(timeline)
+    new FooterAnimation(timeline)
 }

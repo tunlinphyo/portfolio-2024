@@ -1,13 +1,15 @@
-import { ElementBase } from "./base"
+import { HEADER_HEIGHT, MEDIA } from "./helpers/const"
+import BaseElement from "./helpers/element"
+import gsap from "./helpers/gsap"
+import Timeline from "./timeline"
+import { elem } from "./helpers/utils"
 import SplitType from "split-type"
 
-export class HeaderAnimation extends ElementBase {
+export default class HeaderAnimation extends BaseElement {
     private played: boolean = false
-    constructor(readonly selector: string) {
-        super(selector)
-    }
 
-    protected init(): void {
+    constructor(private readonly main: Timeline) {
+        super()
         const mouse = this.animateMouse()
         this.textEffect().then(() => {
             if (window.scrollY < 10) mouse.play()
@@ -16,20 +18,31 @@ export class HeaderAnimation extends ElementBase {
         this.animateButtons()
         this.animateTop()
         this.subscribe()
+        this.animateScroll()
+    }
+
+    private animateScroll() {
+        this.main.timeline.to(".header", {
+            height: HEADER_HEIGHT,
+        }).to(".header-name", {
+            fontSize: "1.2rem",
+        }, "<").to(".header-intro", {
+            opacity: 0,
+        }, "<")
     }
 
     private subscribe() {
-        const toggleTheme = this.$(".toggle-blueprint", document)
+        const toggleTheme = elem(".toggle-blueprint")
 
-        this.$(".contact-me .mouse", document).addEventListener("click", () => {
+        elem(".contact-me .mouse").addEventListener("click", () => {
             this.gotoContact()
         })
 
-        this.$(".goto-top .mouse", document).addEventListener("click", () => {
+        elem(".goto-top .mouse").addEventListener("click", () => {
             this.gotoTop()
         })
 
-        this.$(".header .header-name", document).addEventListener("click", () => {
+        elem(".header .header-name").addEventListener("click", () => {
             this.gotoTop()
         })
 
@@ -41,7 +54,7 @@ export class HeaderAnimation extends ElementBase {
     }
 
     private gotoContact(duration: number = 1) {
-        const timeline = this.gsap.timeline()
+        const timeline = gsap.timeline()
 
         timeline.fromTo(".jumper", {
             x: window.innerWidth,
@@ -68,7 +81,7 @@ export class HeaderAnimation extends ElementBase {
     }
 
     private gotoTop(duration: number = 1) {
-        const timeline = this.gsap.timeline()
+        const timeline = gsap.timeline()
 
         timeline.fromTo(".jumper", {
             x: window.innerWidth * -1,
@@ -96,19 +109,17 @@ export class HeaderAnimation extends ElementBase {
     }
 
     private textEffect(): Promise<true> {
-        const media = this.withMedia()
-
         return new Promise((resolve) => {
-            media.add("(max-width: 767px)", () => {
+            this.main.media.add(MEDIA.SmallOnly, () => {
                 setTimeout(() => {
                     resolve(true)
                 })
             })
-            media.add("(min-width: 768px)", () => {
+            this.main.media.add(MEDIA.MediumAndLarge, () => {
                 const hello = new SplitType('.header .hello', { types: 'chars' })
                 const heading = new SplitType('.header-name', { types: 'chars' })
                 const intro = new SplitType('.header .intro', { types: 'words' })
-                const timeline = this.gsap.timeline()
+                const timeline = gsap.timeline()
 
                 timeline.to([
                     ...hello.chars as HTMLElement[],
@@ -124,7 +135,6 @@ export class HeaderAnimation extends ElementBase {
                     y: 0,
                     opacity: 1,
                     scale: 1,
-                    ease: this.EASE,
                     stagger: 0.02,
                     onComplete: () => {
                         resolve(true)
@@ -135,7 +145,7 @@ export class HeaderAnimation extends ElementBase {
     }
 
     private animateMouse() {
-        const animation = this.gsap.to(".contact-me .mouse", {
+        const animation = gsap.to(".contact-me .mouse", {
             y: 0,
             opacity: 1,
             duration: 1,
@@ -143,7 +153,7 @@ export class HeaderAnimation extends ElementBase {
             paused: true,
         })
 
-        this.gsap.timeline({
+        gsap.timeline({
             scrollTrigger: {
                 trigger: ".mouse-trigger",
                 start: "top top",
@@ -161,15 +171,14 @@ export class HeaderAnimation extends ElementBase {
     }
 
     private animateButtons() {
-        const animation = this.gsap.to(".header-links .button", {
+        const animation = gsap.to(".header-links .button", {
             opacity: 1,
             scale: 1,
             stagger: 0.2,
-            ease: this.EASE,
             paused: true,
         })
 
-        this.gsap.timeline({
+        gsap.timeline({
             scrollTrigger: {
                 trigger: ".buttons-trigger",
                 start: "top top",
@@ -186,7 +195,7 @@ export class HeaderAnimation extends ElementBase {
     }
 
     private animateTop() {
-        const animation = this.gsap.to(".goto-top .mouse", {
+        const animation = gsap.to(".goto-top .mouse", {
             y: 0,
             opacity: 1,
             duration: 1,
@@ -194,7 +203,7 @@ export class HeaderAnimation extends ElementBase {
             paused: true,
         })
 
-        this.gsap.timeline({
+        gsap.timeline({
             scrollTrigger: {
                 trigger: ".top-trigger",
                 start: "top bottom",
