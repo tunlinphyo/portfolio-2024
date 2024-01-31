@@ -21,8 +21,7 @@ body {
 .main {
     .section-intro {
         inline-size: 100%;
-        overflow-x: hidden;
-        overflow-y: visible;
+        overflow: hidden;
 
         display: flex;
         flex-direction: column;

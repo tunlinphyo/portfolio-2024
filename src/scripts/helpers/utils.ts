@@ -25,3 +25,11 @@ export function elem<T extends HTMLElement>(selector: string, parent?: HTMLEleme
 export function elems<T extends HTMLElement>(selector: string, parent?: HTMLElement) {
     return (parent || document).querySelectorAll(selector) as NodeListOf<T>
 }
+
+export function innerText<T extends HTMLElement>(selector: string, text: string, parent?: HTMLElement) {
+    elem<T>(selector, parent).innerText = text
+}
+
+export function innerHTML<T extends HTMLElement>(selector: string, html: string, parent?: HTMLElement) {
+    elem<T>(selector, parent).innerHTML = html
+}

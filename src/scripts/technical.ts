@@ -35,7 +35,7 @@ export default class TechnicalAnimation extends BaseElement {
             this.main.timeline.to(".technical-background", {
                 y: 0,
                 width: this.rect.width,
-                height: this.rect.height - HEADER_HEIGHT,
+                height: "100vh",
                 borderRadius: 2,
                 ease: "power4.in",
             }, ">-0.3").to(".technical-intro .section-title", {
@@ -54,6 +54,7 @@ export default class TechnicalAnimation extends BaseElement {
                 this.main.timeline.to(card, {
                     x: 0,
                     scale: 1,
+                    duration: 0.4,
                     ease: "power1.out",
                 }, index ? "<" : ">-0.15")
 
@@ -61,6 +62,7 @@ export default class TechnicalAnimation extends BaseElement {
                     this.main.timeline.to(card, {
                         x: leave * -1,
                         scale: 0.5,
+                        duration: 0.4,
                         ease: "power1.in",
                     }, ">")
                 }

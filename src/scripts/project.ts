@@ -1,7 +1,7 @@
 import { MEDIA } from "./helpers/const"
 import BaseElement from "./helpers/element"
 import Timeline from "./timeline"
-import { elem } from "./helpers/utils"
+import { elem, innerHTML, innerText } from "./helpers/utils"
 import disableScroll from "./helpers/disabled-scroll"
 import gsap from "./helpers/gsap"
 
@@ -352,14 +352,12 @@ export default class ProjectsAnimation extends BaseElement {
     }
 
     private renderData() {
-        const title = elem(".project h3")
-        const label = elem(".project-footer label")
-        const description = elem(".project-end p")
         const btnOpen = elem(".open-website")
 
-        title.textContent = this.project.title
-        label.innerHTML = this.project.category
-        description.innerHTML = this.project.description
+        innerText(".project h3", this.project.title)
+        innerHTML(".project-footer label", this.project.category)
+        innerHTML(".project-end p", this.project.description)
+
         btnOpen.dataset.url = this.project.url || ''
         elem(".project-end").classList.toggle("with-button", !!this.project.url)
         btnOpen.style.display = this.project.url ? "flex" : "none"
