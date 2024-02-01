@@ -4,6 +4,7 @@ import Timeline from "./timeline"
 import { elem, innerHTML, innerText } from "./helpers/utils"
 import disableScroll from "./helpers/disabled-scroll"
 import gsap from "./helpers/gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 interface Project {
     id: number;
@@ -118,6 +119,17 @@ export default class ProjectsAnimation extends BaseElement {
         elem(".close-website").addEventListener("click", () => {
             this.closeWebsite()
         })
+
+        // ScrollTrigger.observe({
+        //     target: ".project",
+        //     type: "touch",
+        //     onLeft: () => {
+        //         this.renderProject("next")
+        //     },
+        //     onRight: () => {
+        //         this.renderProject("previous")
+        //     }
+        // })
     }
 
     private animateEnter() {

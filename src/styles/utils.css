@@ -18,6 +18,16 @@ body {
     background-color: var(--bg-color);
 }
 
+.viewport {
+    /* visibility: hidden; */
+    pointer-events: none;
+    position: fixed;
+    z-index: 999;
+    inset: 0;
+    background-color: #f002;
+    border: 2px solid #f00;
+}
+
 .main {
     .section-intro {
         inline-size: 100%;
