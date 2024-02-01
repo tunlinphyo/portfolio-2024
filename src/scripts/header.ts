@@ -1,24 +1,20 @@
-import { HEADER_HEIGHT, MEDIA } from "./helpers/const"
+import { HEADER_HEIGHT } from "./helpers/const"
 import BaseElement from "./helpers/element"
 import gsap from "./helpers/gsap"
 import Timeline from "./timeline"
 import { elem } from "./helpers/utils"
-import SplitType from "split-type"
 
 export default class HeaderAnimation extends BaseElement {
-    private played: boolean = false
-
     constructor(private readonly main: Timeline) {
         super()
+
         const mouse = this.animateMouse()
-        this.textEffect().then(() => {
-            if (window.scrollY < 10) mouse.play()
-            this.played = true
-        })
+        this.animateScroll()
         this.animateButtons()
         this.animateTop()
         this.subscribe()
-        this.animateScroll()
+
+        if (window.scrollY < 10) mouse.play()
     }
 
     private animateScroll() {
@@ -108,42 +104,6 @@ export default class HeaderAnimation extends BaseElement {
         }, ">")
     }
 
-    private textEffect(): Promise<true> {
-        return new Promise((resolve) => {
-            this.main.media.add(MEDIA.SmallOnly, () => {
-                setTimeout(() => {
-                    resolve(true)
-                })
-            })
-            this.main.media.add(MEDIA.MediumAndLarge, () => {
-                const hello = new SplitType('.header .hello', { types: 'chars' })
-                const heading = new SplitType('.header-name', { types: 'chars' })
-                const intro = new SplitType('.header .intro', { types: 'words' })
-                const timeline = gsap.timeline()
-
-                timeline.to([
-                    ...hello.chars as HTMLElement[],
-                    ...heading.chars as HTMLElement[],
-                ], {
-                    x: 0,
-                    opacity: 1,
-                    scale: 1,
-                    ease: "power4.in",
-                    stagger: 0.03,
-                }).to(intro.words, {
-                    x: 0,
-                    y: 0,
-                    opacity: 1,
-                    scale: 1,
-                    stagger: 0.02,
-                    onComplete: () => {
-                        resolve(true)
-                    }
-                })
-            })
-        })
-    }
-
     private animateMouse() {
         const animation = gsap.to(".contact-me .mouse", {
             y: 0,
@@ -162,7 +122,7 @@ export default class HeaderAnimation extends BaseElement {
                     animation.reverse()
                 },
                 onLeaveBack: () => {
-                    if (this.played) animation.play()
+                    animation.play()
                 },
             }
         })
@@ -191,7 +151,6 @@ export default class HeaderAnimation extends BaseElement {
                 },
             }
         })
-
     }
 
     private animateTop() {

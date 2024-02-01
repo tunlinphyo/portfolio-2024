@@ -87,16 +87,11 @@
             max-inline-size: 650px;
             block-size: calc(100vh - var(--dx) - var(--header-height));
             max-block-size: 650px;
-            /* background-color: var(--bg-color); */
             border: 1px solid var(--border-color);
             border-radius: 2px;
 
-            translate: 100vmax 0;
-            /* rotate: 10deg; */
-            scale: .5;
-
-            /* translate: 0 100vh;
-            scale: .8; */
+            translate: 100vw 0;
+            scale: .8;
 
             background-color: var(--bg-header);
             backdrop-filter: saturate(180%) blur(10px);
@@ -108,7 +103,6 @@
 
             @media (min-width: 768px) {
                 rotate: 15deg;
-                scale: .8;
             }
 
             .card-layout {

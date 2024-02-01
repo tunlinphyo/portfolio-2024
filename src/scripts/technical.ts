@@ -1,4 +1,4 @@
-import { HEADER_HEIGHT, MEDIA } from "./helpers/const"
+import { MEDIA } from "./helpers/const"
 import BaseElement from "./helpers/element"
 import Timeline from "./timeline"
 import { elems } from "./helpers/utils"
@@ -7,6 +7,19 @@ export default class TechnicalAnimation extends BaseElement {
     constructor(private readonly main: Timeline) {
         super()
 
+        this.animate()
+        this.subscribe()
+    }
+
+    private subscribe() {
+        // gsap.scrollTrigger.addEventListener("refreshInit", () => {
+        //     console.log('TECHNICAL_REFRESH')
+        //     this.main.timeline.scrollTrigger?.refresh()
+        //     // this.animate()
+        // })
+    }
+
+    private animate() {
         this.animateEnter()
         this.animateBackground()
         this.animateCards()
@@ -25,8 +38,8 @@ export default class TechnicalAnimation extends BaseElement {
         this.main.media.add(MEDIA.SmallOnly, () => {
             this.main.timeline.to(".technical-background", {
                 y: 0,
-                width: this.rect.width,
-                height: this.rect.height - HEADER_HEIGHT,
+                width: "100vw",
+                height: "calc(100vh - 60px)",
                 borderRadius: 2,
                 ease: "power3.in",
             }, ">-0.3")
@@ -34,8 +47,8 @@ export default class TechnicalAnimation extends BaseElement {
         this.main.media.add(MEDIA.MediumAndLarge, () => {
             this.main.timeline.to(".technical-background", {
                 y: 0,
-                width: this.rect.width,
-                height: "100vh",
+                width: "100vw",
+                height: "calc(100vh - 60px)",
                 borderRadius: 2,
                 ease: "power4.in",
             }, ">-0.3").to(".technical-intro .section-title", {
@@ -47,22 +60,21 @@ export default class TechnicalAnimation extends BaseElement {
 
     private animateCards() {
         const cards = elems(".technical-card")
-        const leave = Math.max(this.rect.width, this.rect.height)
 
         this.main.media.add(MEDIA.SmallOnly, () => {
             Array.from(cards).forEach((card, index) => {
                 this.main.timeline.to(card, {
                     x: 0,
                     scale: 1,
-                    duration: 0.4,
+                    // duration: 0.4,
                     ease: "power1.out",
-                }, index ? "<" : ">-0.15")
+                }, index ? "<" : ">-0.05")
 
                 if (index < cards.length - 1) {
                     this.main.timeline.to(card, {
-                        x: leave * -1,
-                        scale: 0.5,
-                        duration: 0.4,
+                        x: "-100vw",
+                        scale: 0.8,
+                        // duration: 0.4,
                         ease: "power1.in",
                     }, ">")
                 }
@@ -83,7 +95,7 @@ export default class TechnicalAnimation extends BaseElement {
 
                 if (index < cards.length - 1) {
                     this.main.timeline.to(card, {
-                        x: leave * -1,
+                        x: "-100vw",
                         rotate: -15,
                         scale: 0.8,
                         duration: 0.4,
@@ -108,11 +120,11 @@ export default class TechnicalAnimation extends BaseElement {
 
     private animateTechnicalLeave() {
         this.main.timeline.to(".technical", {
-            y: this.rect.height * -1,
+            y: "-100vh",
             scale: 0.8,
             ease: "none",
         }, ">").to(".technical-intro", {
-            y: this.rect.height * -1,
+            y: "-50vh",
             ease: "power3.out",
         }, "<")
     }

@@ -7,10 +7,6 @@ class BaseElement {
         this.sizeElem = elem(".size-calculator")
     }
 
-    protected init() {
-        console.log("INIT")
-    }
-
     get rect() {
         return this.sizeElem.getBoundingClientRect()
     }

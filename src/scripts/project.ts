@@ -4,7 +4,7 @@ import Timeline from "./timeline"
 import { elem, innerHTML, innerText } from "./helpers/utils"
 import disableScroll from "./helpers/disabled-scroll"
 import gsap from "./helpers/gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
+// import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 interface Project {
     id: number;
@@ -119,17 +119,6 @@ export default class ProjectsAnimation extends BaseElement {
         elem(".close-website").addEventListener("click", () => {
             this.closeWebsite()
         })
-
-        // ScrollTrigger.observe({
-        //     target: ".project",
-        //     type: "touch",
-        //     onLeft: () => {
-        //         this.renderProject("next")
-        //     },
-        //     onRight: () => {
-        //         this.renderProject("previous")
-        //     }
-        // })
     }
 
     private animateEnter() {
@@ -141,7 +130,7 @@ export default class ProjectsAnimation extends BaseElement {
     private animateProjectsIntroLeave() {
         this.main.media.add(MEDIA.MediumAndLarge, () => {
             this.main.timeline.to(".projects-intro .section-title", {
-                y: this.rect.height * -0.2,
+                y: "-20vh",
                 scale: 2,
                 ease: "power4.out",
             }, ">+0.1")
@@ -181,12 +170,13 @@ export default class ProjectsAnimation extends BaseElement {
     private animateProjectLeave() {
         this.main.media.add(MEDIA.SamllAndMedium, () => {
             this.main.timeline.to(".projects", {
-                y: this.rect.height * -0.75,
+                y: "-75vh",
+                duration: 0.6,
             }, ">-0.2")
         })
         this.main.media.add(MEDIA.LargeOnly, () => {
             this.main.timeline.to(".projects", {
-                y: this.rect.height * -0.75,
+                y: "-75vh",
             }, ">-0.2").to(".footer-title", {
                 scale: 1.8,
             }, "<+0.2")
@@ -276,13 +266,11 @@ export default class ProjectsAnimation extends BaseElement {
 
         this.main.media.add(MEDIA.SamllAndMedium, () => {
             const project = elem(".projects .project")
-            const width = this.projectRect.width * 0.5
+            const width = this.projectRect.width * 0.9
 
             timeline.fromTo([project, label], {
-                opacity: 1,
                 x: 0,
             }, {
-                opacity: 0,
                 x: width * leave,
                 ease: "power2.in",
                 onComplete: () => {
@@ -291,10 +279,8 @@ export default class ProjectsAnimation extends BaseElement {
             })
 
             timeline.fromTo([project, label], {
-                opacity: 0,
                 x: width * enter,
             }, {
-                opacity: 1,
                 x: 0,
                 duration: 0.4,
                 ease: "power1.out",

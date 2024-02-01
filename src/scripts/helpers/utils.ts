@@ -1,23 +1,3 @@
-export function mapRange(
-    number: number,
-    startRange1: number, endRange1:
-    number, startRange2: number, endRange2: number
-): number {
-    if (number < startRange1) {
-        number = startRange1
-    } else if (number > endRange1) {
-        number = endRange1
-    }
-
-    const range1 = endRange1 - startRange1
-    const range2 = endRange2 - startRange2
-
-    const mappedValue =
-        ((number - startRange1) * range2) / range1 + startRange2
-
-    return mappedValue
-}
-
 export function elem<T extends HTMLElement>(selector: string, parent?: HTMLElement) {
     return (parent || document).querySelector(selector) as T
 }
@@ -33,3 +13,17 @@ export function innerText<T extends HTMLElement>(selector: string, text: string,
 export function innerHTML<T extends HTMLElement>(selector: string, html: string, parent?: HTMLElement) {
     elem<T>(selector, parent).innerHTML = html
 }
+
+export function debounce<T extends (...args: any[]) => any>(
+    func: T,
+    delay: number
+  ): (...args: Parameters<T>) => void {
+    let timeoutId: number
+
+    return (...args: Parameters<T>): void => {
+      clearTimeout(timeoutId)
+      timeoutId = setTimeout(() => {
+        func(...args)
+      }, delay)
+    };
+  }

@@ -1,22 +1,20 @@
-import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { SCRUB } from "./helpers/const"
 import gsap from "./helpers/gsap"
-import { elem } from "./helpers/utils"
+import { debounce, elem } from "./helpers/utils"
 
 export default class Timeline {
     readonly timeline: GSAPTimeline
-    readonly media: gsap.MatchMedia
-
-    private scrollFunc: ScrollTrigger.ScrollFunc
-    private lastScrollPosition: number = 0
+    media: gsap.MatchMedia
 
     constructor() {
-        ScrollTrigger.config({
-            limitCallbacks: true,
+        gsap.scrollTrigger.config({
+            // limitCallbacks: true,
+            autoRefreshEvents: "resize",
+            // syncInterval: 999999999,
             ignoreMobileResize: true,
         })
-        
-        ScrollTrigger.saveStyles(".header-name")
+
+        gsap.scrollTrigger.saveStyles(".header-name")
         // ScrollTrigger.normalizeScroll(true)
 
         this.timeline = gsap.createTimeline({
@@ -27,21 +25,21 @@ export default class Timeline {
         })
 
         this.media = gsap.matchMedia()
-        this.scrollFunc = ScrollTrigger.getScrollFunc(window)
 
         this.subscribe()
     }
 
     private subscribe() {
-        ScrollTrigger.addEventListener("refreshInit", () => {
-            this.lastScrollPosition = window.scrollY
-            this.scrollFunc(0)
-        })
+        const debounceRefresh = debounce(() => {
+            this.media = gsap.matchMedia()
+            this.timeline.scrollTrigger?.refresh()
+        }, 500)
 
-        ScrollTrigger.addEventListener("refresh", () => {
-            // this.timeline.scrollTrigger?.refresh()
-            // ScrollTrigger.refresh()
-            this.scrollFunc(this.lastScrollPosition)
+        gsap.scrollTrigger.addEventListener("refreshInit", () => {
+            console.log("refreshInit")
+            debounceRefresh()
+            // gsap.scrollTrigger.refresh()
+            // this.timeline.kill()
         })
     }
 }
