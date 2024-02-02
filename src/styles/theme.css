@@ -15,6 +15,7 @@
     --swatch: #DDD;
 
     --accent-color: hsl(204, 70%, 53%);
+    --cross-color: #f9fa93;
 
     --bg-circle: #DDDB;
 
@@ -33,6 +34,7 @@
         --swatch: #333;
 
         --accent-color: hsl(197, 71%, 73%);
+        /* --cross-color: #ffffe6; */
 
         --bg-circle: #111B;
     }

@@ -418,6 +418,34 @@ body {
     }
 }
 
+.six-cross {
+    position: fixed;
+    isolation: isolate;
+    z-index: 0;
+    top: 50vh;
+    right: 0;
+    opacity: .4;
+    inline-size: clamp(300px, 40vw, 400px);
+    aspect-ratio: 1 / 1;
+    translate: 50% -50%;
+
+    /* clip-path: url(#blob);
+    backdrop-filter: invert(100%);
+    -webkit-backdrop-filter: invert(100%); */
+
+    > svg {
+        inline-size: 100%;
+        block-size: 100%;
+    }
+    @media (prefers-color-scheme: dark) {
+        opacity: 0.1;
+    }
+}
+
+.cross-path {
+    width: clamp(250px, 40vw, 400px);
+    height: clamp(250px, 40vw, 400px);
+}
 
 @keyframes shake {
     0% { transform: rotate(10deg)  }

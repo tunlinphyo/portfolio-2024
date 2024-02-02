@@ -1,6 +1,7 @@
 import BaseElement from "./helpers/element"
 import Timeline from "./timeline"
 import { elems } from "./helpers/utils"
+import gsap from "./helpers/gsap"
 
 export default class TechnicalAnimation extends BaseElement {
     constructor(readonly timeline: Timeline) {
@@ -23,7 +24,19 @@ export default class TechnicalAnimation extends BaseElement {
     }
 
     private animateBackground() {
+        const scaleX = gsap.mapRange(0, window.innerWidth, 0, 1, 200)
+        const scaleY = gsap.mapRange(0, window.innerHeight, 0, 1, 200)
+
+        console.log(scaleX, scaleY)
+
         this.onSmallDevice(() => {
+            // this.from(".technical-background", {
+            //     y: '10vh',
+            //     scaleX,
+            //     scaleY,
+            //     borderRadius: window.innerWidth * 0.5,
+            //     ease: "power3.in",
+            // }, ">-0.3")
             this.to(".technical-background", {
                 y: 0,
                 width: "100vw",
@@ -55,7 +68,6 @@ export default class TechnicalAnimation extends BaseElement {
                     x: 0,
                     scale: 1,
                     // duration: 0.4,
-                    ease: "power1.out",
                 }, index ? "<" : ">-0.05")
 
                 if (index < cards.length - 1) {

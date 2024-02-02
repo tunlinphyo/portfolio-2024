@@ -17,7 +17,8 @@
     overflow: hidden;
 
     position: fixed;
-    z-index: 1;
+    isolation: isolate;
+    z-index: 2;
     inset: 0;
     top: var(--header-height);
     height: calc(100vh - var(--header-height));
@@ -58,6 +59,10 @@
 
         translate: 0 40vh;
 
+        /* inline-size: 100vw;
+        block-size: calc(100vh - var(--header-height));
+        border-radius: 2px; */
+
         > svg {
             width: calc(var(--size) * 0.555);
             height: calc(var(--size) * 0.555);
@@ -66,7 +71,8 @@
     }
 
     .technical-cards {
-        position: absolute;
+        position: fixed;
+        isolation: isolate;
         z-index: 2;
         inset: 0;
         overflow: hidden;

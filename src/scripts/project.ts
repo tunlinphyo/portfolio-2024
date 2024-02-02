@@ -1,6 +1,6 @@
 import BaseElement from "./helpers/element"
 import Timeline from "./timeline"
-import { elem, innerHTML, innerText } from "./helpers/utils"
+import { addClass, applyStyles, dataSet, elem, elems, innerHTML, innerText, removeClass, toggleClass } from "./helpers/utils"
 import disableScroll from "./helpers/disabled-scroll"
 import gsap from "./helpers/gsap"
 
@@ -187,7 +187,7 @@ export default class ProjectsAnimation extends BaseElement {
         const iframeContainer = elem(".iframe-container")
         const iframe = elem<HTMLIFrameElement>(".iframe", iframeContainer)
 
-        iframeContainer.classList.add("opened")
+        addClass(iframeContainer, "opened")
         const timeline = gsap.timeline()
 
         disableScroll.on()
@@ -204,7 +204,7 @@ export default class ProjectsAnimation extends BaseElement {
             onComplete: () => {
                 iframe.src = url
                 iframe.onload = () => {
-                    iframe.classList.add("ready")
+                    addClass(iframe, "ready")
                 }
             }
         }).to(".close-website", {
@@ -233,8 +233,8 @@ export default class ProjectsAnimation extends BaseElement {
         }).to(".iframe-container", {
             opacity: 0,
             onComplete: () => {
-                iframeContainer.classList.remove("opened")
-                iframe.classList.remove("ready")
+                removeClass(iframeContainer, "opened")
+                removeClass(iframe, "ready")
             }
         })
     }
@@ -260,7 +260,7 @@ export default class ProjectsAnimation extends BaseElement {
         const leave = isNext ? -1 : 1
         const enter = isNext ? 1 : -1
 
-        controls.classList.add("disabled")
+        addClass(controls, "disabled")
         this.animating = true
 
         this.onSmallAndMediumDevice(() => {
@@ -284,7 +284,7 @@ export default class ProjectsAnimation extends BaseElement {
                 duration: 0.4,
                 ease: "power1.out",
                 onComplete: () => {
-                    controls.classList.remove("disabled")
+                    removeClass(controls, "disabled")
                     this.animating = false
                 },
             })
@@ -331,7 +331,7 @@ export default class ProjectsAnimation extends BaseElement {
                 opacity: 1,
                 y: 0,
                 onComplete: () => {
-                    controls.classList.remove("disabled")
+                    removeClass(controls, "disabled")
                     this.animating = false
                 },
             }, ">")
@@ -349,14 +349,16 @@ export default class ProjectsAnimation extends BaseElement {
     }
 
     private renderData() {
-        const btnOpen = elem(".open-website")
+        const button = elem<HTMLButtonElement>(".open-website")
 
         innerText(".project h3", this.project.title)
         innerHTML(".project-footer label", this.project.category)
         innerHTML(".project-end p", this.project.description)
 
-        btnOpen.dataset.url = this.project.url || ''
-        elem(".project-end").classList.toggle("with-button", !!this.project.url)
-        btnOpen.style.display = this.project.url ? "flex" : "none"
+        dataSet(button, { url: this.project.url || '' })
+        toggleClass(".project-end", "with-button", !!this.project.url)
+        applyStyles(button, {
+            display: this.project.url ? "flex" : "none",
+        })
     }
 }

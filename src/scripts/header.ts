@@ -2,7 +2,7 @@ import { HEADER_HEIGHT } from "./helpers/const"
 import BaseElement from "./helpers/element"
 import gsap from "./helpers/gsap"
 import Timeline from "./timeline"
-import { elem } from "./helpers/utils"
+import { dataSet, elem, getStyleValue, hasClass, toggleClass } from "./helpers/utils"
 
 export default class HeaderAnimation extends BaseElement {
     constructor(readonly timeline: Timeline) {
@@ -31,19 +31,26 @@ export default class HeaderAnimation extends BaseElement {
         })
 
         toggleTheme.addEventListener("click", () => {
-            document.body.classList.toggle("blueprint")
-            const has = !!document.body.classList.contains("blueprint")
-            toggleTheme.dataset.popup = has ? "Blueprint On" : "Blueprint Off"
+            toggleClass(document.body, "blueprint")
+            const has = hasClass(document.body, "blueprint")
+            dataSet(".toggle-blueprint", { popup: has ? "Blueprint On" : "Blueprint Off" })
         })
     }
 
     protected animate() {
+        const fontSize = getStyleValue(".header-name", "font-size")
+        const maxSize = parseInt(fontSize)
+        const endScale = gsap.mapRange(0, maxSize, 0, 1, 18)
+
         this.to(".header", {
             height: HEADER_HEIGHT,
         }).to(".header-name", {
-            fontSize: "1.2rem",
+            // fontSize: "1.2rem",
+            scale: endScale,
         }, "<").to(".header-intro", {
             opacity: 0,
+            duration: 0.3,
+            y: "calc(0 - 100vh)",
         }, "<")
     }
 

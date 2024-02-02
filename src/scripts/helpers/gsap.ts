@@ -35,6 +35,10 @@ class Gsap {
     clamp(minimum: number, maximum: number, valueToClamp: number) {
         return gsap.utils.clamp(minimum, maximum, valueToClamp)
     }
+
+    mapRange(inMin: number, inMax: number, outMin: number, outMax: number, value: number) {
+        return gsap.utils.mapRange(inMin, inMax, outMin, outMax, value)
+    }
 }
 
 export default new Gsap()

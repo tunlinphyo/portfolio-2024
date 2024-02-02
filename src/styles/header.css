@@ -28,14 +28,7 @@
                 font-weight: 900;
                 line-height: 1.25;
                 margin: 0;
-                will-change: font-size;
-
-                .char {
-                    opacity: 0;
-                    translate: 1em 0;
-                    scale: 1;
-                    transform-origin: center left;
-                }
+                transform-origin: left center;
             }
 
             .hello {
