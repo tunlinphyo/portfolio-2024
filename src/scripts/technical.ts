@@ -110,11 +110,11 @@ export default class TechnicalAnimation extends BaseElement {
     private animateSkills(elem: HTMLElement) {
         const skills = elems(".skill-circle", elem)
 
-        Array.from(skills).forEach((skill) => {
+        Array.from(skills).forEach((skill, index) => {
             this.main.timeline.from(skill, {
                 background: "conic-gradient(var(--fill-color) 0%, var(--stoke-color) 0)",
-                ease: "power1.in",
-            }, "<")
+                ease: "power1.out",
+            }, index ? "<" : ">-0.1")
         });
     }
 

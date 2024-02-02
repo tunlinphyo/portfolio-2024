@@ -36,10 +36,7 @@ export default class Timeline {
         }, 500)
 
         gsap.scrollTrigger.addEventListener("refreshInit", () => {
-            console.log("refreshInit")
             debounceRefresh()
-            // gsap.scrollTrigger.refresh()
-            // this.timeline.kill()
         })
     }
 }

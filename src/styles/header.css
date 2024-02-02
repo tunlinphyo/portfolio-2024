@@ -136,7 +136,3 @@
         }
     }
 }
-
-.contact-me {
-    bottom: calc(var(--x) + 10px);
-}
