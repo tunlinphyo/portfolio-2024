@@ -1,31 +1,28 @@
-import { MEDIA } from "./helpers/const"
 import BaseElement from "./helpers/element"
 import Timeline from "./timeline"
 import { elems } from "./helpers/utils"
 import SplitType from "split-type"
 
 export default class FooterAnimation extends BaseElement {
-    constructor(private readonly main: Timeline) {
-        super()
-
-        this.animateContacts()
+    constructor(readonly timeline: Timeline) {
+        super(timeline)
     }
 
-    private animateContacts() {
+    protected animate() {
         const a = elems(".contacts a")
 
-        this.main.media.add(MEDIA.SamllAndMedium, () => {
-            this.main.timeline.from(a, {
+        this.onSmallAndMediumDevice(() => {
+            this.from(a, {
                 x: 40,
                 opacity: 0,
                 duration: 0.3,
                 stagger: 0.05,
             }, ">-0.4")
         })
-        this.main.media.add(MEDIA.LargeOnly, () => {
+        this.onLargeDevice(() => {
             const links = new SplitType(a, { types: 'chars' })
 
-            this.main.timeline.to(links.chars, {
+            this.to(links.chars, {
                 x: 0,
                 opacity: 1,
                 duration: 0.1,

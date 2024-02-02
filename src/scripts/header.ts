@@ -5,29 +5,17 @@ import Timeline from "./timeline"
 import { elem } from "./helpers/utils"
 
 export default class HeaderAnimation extends BaseElement {
-    constructor(private readonly main: Timeline) {
-        super()
+    constructor(readonly timeline: Timeline) {
+        super(timeline)
 
         const mouse = this.animateMouse()
-        this.animateScroll()
         this.animateButtons()
         this.animateTop()
-        this.subscribe()
 
         if (window.scrollY < 10) mouse.play()
     }
 
-    private animateScroll() {
-        this.main.timeline.to(".header", {
-            height: HEADER_HEIGHT,
-        }).to(".header-name", {
-            fontSize: "1.2rem",
-        }, "<").to(".header-intro", {
-            opacity: 0,
-        }, "<")
-    }
-
-    private subscribe() {
+    protected subscribe() {
         const toggleTheme = elem(".toggle-blueprint")
 
         elem(".contact-me .mouse").addEventListener("click", () => {
@@ -47,6 +35,16 @@ export default class HeaderAnimation extends BaseElement {
             const has = !!document.body.classList.contains("blueprint")
             toggleTheme.dataset.popup = has ? "Blueprint On" : "Blueprint Off"
         })
+    }
+
+    protected animate() {
+        this.to(".header", {
+            height: HEADER_HEIGHT,
+        }).to(".header-name", {
+            fontSize: "1.2rem",
+        }, "<").to(".header-intro", {
+            opacity: 0,
+        }, "<")
     }
 
     private gotoContact(duration: number = 1) {

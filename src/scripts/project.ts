@@ -1,10 +1,8 @@
-import { MEDIA } from "./helpers/const"
 import BaseElement from "./helpers/element"
 import Timeline from "./timeline"
 import { elem, innerHTML, innerText } from "./helpers/utils"
 import disableScroll from "./helpers/disabled-scroll"
 import gsap from "./helpers/gsap"
-// import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 interface Project {
     id: number;
@@ -77,15 +75,8 @@ export default class ProjectsAnimation extends BaseElement {
     ]
     protected currentIndex: number = 0
     protected animating: boolean = false
-    constructor(private readonly main: Timeline) {
-        super()
-
-        this.animateEnter()
-        this.animateProjectsIntroLeave()
-        this.animateProjectsEnter()
-        this.animateControls()
-        this.animateProjectLeave()
-        this.subscribe()
+    constructor(readonly timeline: Timeline) {
+        super(timeline)
     }
 
     get projectRect() {
@@ -104,7 +95,7 @@ export default class ProjectsAnimation extends BaseElement {
         else this.currentIndex = number
     }
 
-    private subscribe() {
+    protected subscribe() {
         const btnOpen = elem(".open-website")
         elem(".control.previous").addEventListener("click", () => {
             this.renderProject("previous")
@@ -121,15 +112,23 @@ export default class ProjectsAnimation extends BaseElement {
         })
     }
 
+    protected animate(): void {
+        this.animateEnter()
+        this.animateProjectsIntroLeave()
+        this.animateProjectsEnter()
+        this.animateControls()
+        this.animateProjectLeave()
+    }
+
     private animateEnter() {
-        this.main.timeline.to(".projects-intro", {
+        this.to(".projects-intro", {
             y: 0,
         }, "<+0.1")
     }
 
     private animateProjectsIntroLeave() {
-        this.main.media.add(MEDIA.MediumAndLarge, () => {
-            this.main.timeline.to(".projects-intro .section-title", {
+        this.onMediumAndLargeDevice(() => {
+            this.to(".projects-intro .section-title", {
                 y: "-20vh",
                 scale: 2,
                 ease: "power4.out",
@@ -138,15 +137,15 @@ export default class ProjectsAnimation extends BaseElement {
     }
 
     private animateProjectsEnter() {
-        this.main.media.add(MEDIA.SmallOnly, () => {
-            this.main.timeline.to(".project-container", {
+        this.onSmallDevice(() => {
+            this.to(".project-container", {
                 y: 0,
                 scale: 1,
                 duration: 0.6,
             }, "<+0.3")
         })
-        this.main.media.add(MEDIA.MediumAndLarge, () => {
-            this.main.timeline.to(".project-container", {
+        this.onMediumAndLargeDevice(() => {
+            this.to(".project-container", {
                 y: 0,
                 scale: 1,
             }, "<-0.4")
@@ -154,7 +153,7 @@ export default class ProjectsAnimation extends BaseElement {
     }
 
     private animateControls() {
-        this.main.timeline.fromTo(".control", {
+        this.fromTo(".control", {
             background: "conic-gradient(var(--fill-color) 0%, var(--stoke-color) 0)",
         }, {
             background: "conic-gradient(var(--fill-color) 100%, var(--stoke-color) 0)",
@@ -168,14 +167,14 @@ export default class ProjectsAnimation extends BaseElement {
     }
 
     private animateProjectLeave() {
-        this.main.media.add(MEDIA.SamllAndMedium, () => {
-            this.main.timeline.to(".projects", {
+        this.onSmallAndMediumDevice(() => {
+            this.to(".projects", {
                 y: "-75vh",
                 duration: 0.6,
             }, ">-0.2")
         })
-        this.main.media.add(MEDIA.LargeOnly, () => {
-            this.main.timeline.to(".projects", {
+        this.onLargeDevice(() => {
+            this.to(".projects", {
                 y: "-75vh",
             }, ">-0.2").to(".footer-title", {
                 scale: 1.8,
@@ -264,7 +263,7 @@ export default class ProjectsAnimation extends BaseElement {
         controls.classList.add("disabled")
         this.animating = true
 
-        this.main.media.add(MEDIA.SamllAndMedium, () => {
+        this.onSmallAndMediumDevice(() => {
             const project = elem(".projects .project")
             const width = this.projectRect.width * 0.9
 
@@ -291,7 +290,7 @@ export default class ProjectsAnimation extends BaseElement {
             })
         })
 
-        this.main.media.add(MEDIA.LargeOnly, () => {
+        this.onLargeDevice(() => {
             const width = this.projectRect.width * 0.25
             const title = elem(".project h3")
             const description = elem(".project-end p")

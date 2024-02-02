@@ -1,25 +1,13 @@
-import { MEDIA } from "./helpers/const"
 import BaseElement from "./helpers/element"
 import Timeline from "./timeline"
 import { elems } from "./helpers/utils"
 
 export default class TechnicalAnimation extends BaseElement {
-    constructor(private readonly main: Timeline) {
-        super()
-
-        this.animate()
-        this.subscribe()
+    constructor(readonly timeline: Timeline) {
+        super(timeline)
     }
 
-    private subscribe() {
-        // gsap.scrollTrigger.addEventListener("refreshInit", () => {
-        //     console.log('TECHNICAL_REFRESH')
-        //     this.main.timeline.scrollTrigger?.refresh()
-        //     // this.animate()
-        // })
-    }
-
-    private animate() {
+    protected animate() {
         this.animateEnter()
         this.animateBackground()
         this.animateCards()
@@ -27,7 +15,7 @@ export default class TechnicalAnimation extends BaseElement {
     }
 
     private animateEnter() {
-        this.main.timeline.to(".technical-intro", {
+        this.to(".technical-intro", {
             y: 0,
         }, "<+0.05").to(".technical", {
             y: 0,
@@ -35,8 +23,8 @@ export default class TechnicalAnimation extends BaseElement {
     }
 
     private animateBackground() {
-        this.main.media.add(MEDIA.SmallOnly, () => {
-            this.main.timeline.to(".technical-background", {
+        this.onSmallDevice(() => {
+            this.to(".technical-background", {
                 y: 0,
                 width: "100vw",
                 height: "calc(100vh - 60px)",
@@ -44,8 +32,8 @@ export default class TechnicalAnimation extends BaseElement {
                 ease: "power3.in",
             }, ">-0.3")
         })
-        this.main.media.add(MEDIA.MediumAndLarge, () => {
-            this.main.timeline.to(".technical-background", {
+        this.onMediumAndLargeDevice(() => {
+            this.to(".technical-background", {
                 y: 0,
                 width: "100vw",
                 height: "calc(100vh - 60px)",
@@ -61,9 +49,9 @@ export default class TechnicalAnimation extends BaseElement {
     private animateCards() {
         const cards = elems(".technical-card")
 
-        this.main.media.add(MEDIA.SmallOnly, () => {
+        this.onSmallDevice(() => {
             Array.from(cards).forEach((card, index) => {
-                this.main.timeline.to(card, {
+                this.to(card, {
                     x: 0,
                     scale: 1,
                     // duration: 0.4,
@@ -71,7 +59,7 @@ export default class TechnicalAnimation extends BaseElement {
                 }, index ? "<" : ">-0.05")
 
                 if (index < cards.length - 1) {
-                    this.main.timeline.to(card, {
+                    this.to(card, {
                         x: "-100vw",
                         scale: 0.8,
                         // duration: 0.4,
@@ -80,9 +68,9 @@ export default class TechnicalAnimation extends BaseElement {
                 }
             })
         })
-        this.main.media.add(MEDIA.MediumAndLarge, () => {
+        this.onMediumAndLargeDevice(() => {
             Array.from(cards).forEach((card, index) => {
-                this.main.timeline.to(card, {
+                this.to(card, {
                     x: 0,
                     y: 0,
                     rotate: 0,
@@ -94,7 +82,7 @@ export default class TechnicalAnimation extends BaseElement {
                 this.animateSkills(card)
 
                 if (index < cards.length - 1) {
-                    this.main.timeline.to(card, {
+                    this.to(card, {
                         x: "-100vw",
                         rotate: -15,
                         scale: 0.8,
@@ -111,7 +99,7 @@ export default class TechnicalAnimation extends BaseElement {
         const skills = elems(".skill-circle", elem)
 
         Array.from(skills).forEach((skill, index) => {
-            this.main.timeline.from(skill, {
+            this.from(skill, {
                 background: "conic-gradient(var(--fill-color) 0%, var(--stoke-color) 0)",
                 ease: "power1.out",
             }, index ? "<" : ">-0.1")
@@ -119,7 +107,7 @@ export default class TechnicalAnimation extends BaseElement {
     }
 
     private animateTechnicalLeave() {
-        this.main.timeline.to(".technical", {
+        this.to(".technical", {
             y: "-100vh",
             scale: 0.8,
             ease: "none",
