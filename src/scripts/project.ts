@@ -145,7 +145,8 @@ export default class ProjectsAnimation extends BaseElement {
             this.to(".project-container", {
                 y: 0,
                 scale: 1,
-            }, "<+0.3")
+                ease: "power0",
+            }, "<+0.2")
         })
         this.onMediumAndLargeDevice(() => {
             this.to(".project-container", {
@@ -165,7 +166,6 @@ export default class ProjectsAnimation extends BaseElement {
             duration: 0.2,
         }, ">-0.2").to(".footer", {
             y: 0,
-            scale: 1,
         }, "<+0.1")
     }
 
@@ -173,7 +173,9 @@ export default class ProjectsAnimation extends BaseElement {
         this.onSmallAndMediumDevice(() => {
             this.to(".projects", {
                 y: "-75vh",
-            }, ">-0.3")
+                duration: 0.4,
+                ease: "power0",
+            }, ">")
         })
         this.onLargeDevice(() => {
             this.to(".projects", {

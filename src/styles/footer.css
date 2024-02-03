@@ -6,6 +6,7 @@
 
     inline-size: 100%;
     block-size: calc(100vh - var(--header-height));
+    background-color: var(--bg-color);
 
     translate: 0 100vh;
 
@@ -83,7 +84,7 @@
     }
 
     .copyright {
-        position: sticky;
+        position: absolute;
         left: 0;
         bottom: 0;
         inline-size: 100%;

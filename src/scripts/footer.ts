@@ -11,14 +11,14 @@ export default class FooterAnimation extends BaseElement {
     protected animate() {
         const a = elems(".contacts a")
 
-        this.onSmallAndMediumDevice(() => {
-            this.from(a, {
-                x: 40,
-                opacity: 0,
-                duration: 0.3,
-                stagger: 0.05,
-            }, ">-0.4")
-        })
+        // this.onSmallAndMediumDevice(() => {
+        //     this.from(a, {
+        //         x: 40,
+        //         opacity: 0,
+        //         duration: 0.3,
+        //         stagger: 0.05,
+        //     }, ">-0.4")
+        // })
         this.onLargeDevice(() => {
             const links = new SplitType(a, { types: 'chars' })
 
