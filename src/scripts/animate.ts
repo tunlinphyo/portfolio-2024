@@ -7,7 +7,8 @@ export default class Animate {
     }
 
     run() {
-        const cross = elem(".six-cross")
+        const container = elem(".six-cross .container")
+        const cross = elem(".cross", container)
 
         const timeline = gsap.createTimeline({
             trigger: elem(".scroll-trigger"),
@@ -17,7 +18,7 @@ export default class Animate {
         })
 
         timeline.to(cross, {
-            rotate: 360,
+            rotate: 360 * 2,
             ease: "none",
         })
     }

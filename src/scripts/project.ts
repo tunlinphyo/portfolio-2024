@@ -1,6 +1,6 @@
 import BaseElement from "./helpers/element"
 import Timeline from "./timeline"
-import { addClass, applyStyles, dataSet, elem, elems, innerHTML, innerText, removeClass, toggleClass } from "./helpers/utils"
+import { addClass, applyStyles, dataSet, elem, innerHTML, innerText, removeClass, toggleClass } from "./helpers/utils"
 import disableScroll from "./helpers/disabled-scroll"
 import gsap from "./helpers/gsap"
 
@@ -141,7 +141,6 @@ export default class ProjectsAnimation extends BaseElement {
             this.to(".project-container", {
                 y: 0,
                 scale: 1,
-                duration: 0.6,
             }, "<+0.3")
         })
         this.onMediumAndLargeDevice(() => {
@@ -170,8 +169,7 @@ export default class ProjectsAnimation extends BaseElement {
         this.onSmallAndMediumDevice(() => {
             this.to(".projects", {
                 y: "-75vh",
-                duration: 0.6,
-            }, ">-0.2")
+            }, ">-0.3")
         })
         this.onLargeDevice(() => {
             this.to(".projects", {

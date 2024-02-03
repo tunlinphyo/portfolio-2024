@@ -1,7 +1,7 @@
 import BaseElement from "./helpers/element"
 import Timeline from "./timeline"
 import { elems } from "./helpers/utils"
-import gsap from "./helpers/gsap"
+// import gsap from "./helpers/gsap"
 
 export default class TechnicalAnimation extends BaseElement {
     constructor(readonly timeline: Timeline) {
@@ -24,10 +24,10 @@ export default class TechnicalAnimation extends BaseElement {
     }
 
     private animateBackground() {
-        const scaleX = gsap.mapRange(0, window.innerWidth, 0, 1, 200)
-        const scaleY = gsap.mapRange(0, window.innerHeight, 0, 1, 200)
+        // const scaleX = gsap.mapRange(0, window.innerWidth, 0, 1, 200)
+        // const scaleY = gsap.mapRange(0, window.innerHeight, 0, 1, 200)
 
-        console.log(scaleX, scaleY)
+        // console.log(scaleX, scaleY)
 
         this.onSmallDevice(() => {
             // this.from(".technical-background", {

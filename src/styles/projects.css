@@ -46,13 +46,9 @@
 
         border-top: 2px solid var(--border-color);
         border-radius: 0;
-
-        background-color: var(--bg-header);
-        backdrop-filter: saturate(180%) blur(10px);
-        -webkit-backdrop-filter: saturate(180%) blur(10px);
-
+        
         overflow: hidden;
-
+        
         @media (min-width: 1400px) {
             max-block-size: 900px;
         }
@@ -79,6 +75,7 @@
             .project {
                 inline-size: 100%;
                 block-size: 100%;
+
                 /* display: grid;
                 grid-template-columns: minmax(0, 1fr);
                 grid-template-rows: minmax(0, .5fr) minmax(0, 1fr); */
