@@ -21,6 +21,8 @@ body {
 .background-blur {
     background-color: var(--bg-header);
     transform: translateZ(10px);
+    backdrop-filter: saturate(180%) blur(10px);
+    -webkit-backdrop-filter: saturate(180%) blur(10px);
     
     @media (min-width: 992px) {
         backdrop-filter: saturate(180%) blur(10px);
@@ -76,7 +78,7 @@ body {
 
     .scroll-trigger {
         inline-size: 100%;
-        block-size: 800vh;
+        block-size: 700vh;
 
         display: flex;
         flex-direction: column;
@@ -233,7 +235,8 @@ body {
 
     pointer-events: none;
     opacity: 0;
-    /* translate: 0 120%; */
+    translate: 0 100vh;
+    scale: 0;
 
     &.opened {
         pointer-events: auto;
@@ -455,19 +458,28 @@ body {
             inline-size: clamp(250px, 40vw, 400px);
             aspect-ratio: 1 / 1;
             translate: 50% -50%;
-
-            opacity: .9;
         
             clip-path: url(#blob);
-            background-color: var(--cross-color);
-            /* background-color: transparent;
-            backdrop-filter: invert(75%);
-            -webkit-backdrop-filter: invert(75%);
-            transform: translateZ(0); */
+            background-color: transparent;
+            backdrop-filter: invert(100%);
+            -webkit-backdrop-filter: invert(100%);
+            transform: translateZ(0);  
 
-            @media (prefers-color-scheme: dark) {
+            /* @media (max-width: 991px) and (prefers-color-scheme: dark) {
                 opacity: .5;
             }
+
+            @media (max-width: 991px) {
+                opacity: .9;
+                background-color: var(--cross-color);
+            }
+
+            @media (min-width: 992px) {
+                background-color: transparent;
+                backdrop-filter: invert(100%);
+                -webkit-backdrop-filter: invert(100%);
+                transform: translateZ(0);  
+            } */
         }
     }
 

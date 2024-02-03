@@ -1,3 +1,4 @@
+import { SCRUB } from "./helpers/const"
 import gsap from "./helpers/gsap"
 import { elem } from "./helpers/utils"
 
@@ -14,7 +15,7 @@ export default class Animate {
             trigger: elem(".scroll-trigger"),
             start: "top bottom",
             end: "bottom bottom",
-            scrub: 3,
+            scrub: SCRUB,
         })
 
         timeline.to(cross, {

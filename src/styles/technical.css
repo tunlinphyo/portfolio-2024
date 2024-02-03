@@ -60,7 +60,7 @@
         /* inline-size: 100vw;
         block-size: calc(100vh - var(--header-height));
         border-radius: 2px; */
-
+        
         > svg {
             width: calc(var(--size) * 0.555);
             height: calc(var(--size) * 0.555);

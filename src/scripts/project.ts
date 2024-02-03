@@ -1,7 +1,11 @@
 import BaseElement from "./helpers/element"
 import Timeline from "./timeline"
-import { addClass, applyStyles, dataSet, elem, innerHTML, innerText, removeClass, toggleClass } from "./helpers/utils"
-import disableScroll from "./helpers/disabled-scroll"
+import { addClass, 
+    // applyStyles, dataSet, 
+    elem, innerHTML, innerText, removeClass, 
+    // toggleClass 
+} from "./helpers/utils"
+// import disableScroll from "./helpers/disabled-scroll"
 import gsap from "./helpers/gsap"
 
 interface Project {
@@ -96,20 +100,20 @@ export default class ProjectsAnimation extends BaseElement {
     }
 
     protected subscribe() {
-        const btnOpen = elem(".open-website")
+        // const btnOpen = elem(".open-website")
         elem(".control.previous").addEventListener("click", () => {
             this.renderProject("previous")
         })
         elem(".control.next").addEventListener("click", () => {
             this.renderProject("next")
         })
-        btnOpen.addEventListener("click", () => {
-            const url = btnOpen.dataset.url
-            this.openWebsite(url)
-        })
-        elem(".close-website").addEventListener("click", () => {
-            this.closeWebsite()
-        })
+        // btnOpen.addEventListener("click", () => {
+        //     const url = btnOpen.dataset.url
+        //     this.openWebsite(url)
+        // })
+        // elem(".close-website").addEventListener("click", () => {
+        //     this.closeWebsite()
+        // })
     }
 
     protected animate(): void {
@@ -180,62 +184,62 @@ export default class ProjectsAnimation extends BaseElement {
         })
     }
 
-    private openWebsite(url?: string) {
-        if (!url) return
-        const iframeContainer = elem(".iframe-container")
-        const iframe = elem<HTMLIFrameElement>(".iframe", iframeContainer)
+    // private openWebsite(url?: string) {
+    //     if (!url) return
+    //     const iframeContainer = elem(".iframe-container")
+    //     const iframe = elem<HTMLIFrameElement>(".iframe", iframeContainer)
 
-        addClass(iframeContainer, "opened")
-        const timeline = gsap.timeline()
+    //     addClass(iframeContainer, "opened")
+    //     const timeline = gsap.timeline()
 
-        disableScroll.on()
+    //     disableScroll.on()
 
-        timeline.fromTo(".iframe-container", {
-            y: window.innerHeight,
-            opacity: 1,
-            scale: 0.8,
-        }, {
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            ease: "circ.out",
-            onComplete: () => {
-                iframe.src = url
-                iframe.onload = () => {
-                    addClass(iframe, "ready")
-                }
-            }
-        }).to(".close-website", {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            ease: "back.out(1)",
-        })
-    }
+    //     timeline.fromTo(".iframe-container", {
+    //         y: window.innerHeight,
+    //         opacity: 1,
+    //         scale: 0.8,
+    //     }, {
+    //         y: 0,
+    //         opacity: 1,
+    //         scale: 1,
+    //         ease: "circ.out",
+    //         onComplete: () => {
+    //             iframe.src = url
+    //             iframe.onload = () => {
+    //                 addClass(iframe, "ready")
+    //             }
+    //         }
+    //     }).to(".close-website", {
+    //         y: 0,
+    //         opacity: 1,
+    //         duration: 1,
+    //         ease: "back.out(1)",
+    //     })
+    // }
 
-    private closeWebsite() {
-        const iframeContainer = elem(".iframe-container")
-        const iframe = elem<HTMLIFrameElement>(".iframe", iframeContainer)
-        const timeline = gsap.timeline()
+    // private closeWebsite() {
+    //     const iframeContainer = elem(".iframe-container")
+    //     const iframe = elem<HTMLIFrameElement>(".iframe", iframeContainer)
+    //     const timeline = gsap.timeline()
 
-        disableScroll.off()
+    //     disableScroll.off()
 
-        timeline.to(".close-website", {
-            y: 200,
-            opacity: 0,
-            duration: 0.7,
-            ease: "back.in(1)",
-            onComplete: () => {
-                iframe.src = ''
-            }
-        }).to(".iframe-container", {
-            opacity: 0,
-            onComplete: () => {
-                removeClass(iframeContainer, "opened")
-                removeClass(iframe, "ready")
-            }
-        })
-    }
+    //     timeline.to(".close-website", {
+    //         y: 200,
+    //         opacity: 0,
+    //         duration: 0.7,
+    //         ease: "back.in(1)",
+    //         onComplete: () => {
+    //             iframe.src = ''
+    //         }
+    //     }).to(".iframe-container", {
+    //         opacity: 0,
+    //         onComplete: () => {
+    //             removeClass(iframeContainer, "opened")
+    //             removeClass(iframe, "ready")
+    //         }
+    //     })
+    // }
 
     private renderProject(action: "previous" | "next") {
         if (this.animating) return
@@ -347,16 +351,16 @@ export default class ProjectsAnimation extends BaseElement {
     }
 
     private renderData() {
-        const button = elem<HTMLButtonElement>(".open-website")
+        // const button = elem<HTMLButtonElement>(".open-website")
 
         innerText(".project h3", this.project.title)
         innerHTML(".project-footer label", this.project.category)
         innerHTML(".project-end p", this.project.description)
 
-        dataSet(button, { url: this.project.url || '' })
-        toggleClass(".project-end", "with-button", !!this.project.url)
-        applyStyles(button, {
-            display: this.project.url ? "flex" : "none",
-        })
+        // dataSet(button, { url: this.project.url || '' })
+        // toggleClass(".project-end", "with-button", !!this.project.url)
+        // applyStyles(button, {
+        //     display: this.project.url ? "flex" : "none",
+        // })
     }
 }
