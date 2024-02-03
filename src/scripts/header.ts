@@ -16,7 +16,7 @@ export default class HeaderAnimation extends BaseElement {
     }
 
     protected subscribe() {
-        const toggleTheme = elem(".toggle-blueprint")
+        const toggle = elem(".toggle-blueprint")
 
         elem(".contact-me .mouse").addEventListener("click", () => {
             this.gotoContact()
@@ -30,10 +30,10 @@ export default class HeaderAnimation extends BaseElement {
             this.gotoTop()
         })
 
-        toggleTheme.addEventListener("click", () => {
+        toggle.addEventListener("click", () => {
             toggleClass(document.body, "blueprint")
             const has = hasClass(document.body, "blueprint")
-            dataSet(".toggle-blueprint", { popup: has ? "Blueprint On" : "Blueprint Off" })
+            dataSet(toggle, { popup: has ? "Blueprint On" : "Blueprint Off" })
         })
     }
 

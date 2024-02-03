@@ -114,7 +114,7 @@ export default class TechnicalAnimation extends BaseElement {
             this.from(skill, {
                 background: "conic-gradient(var(--fill-color) 0%, var(--stoke-color) 0)",
                 ease: "power1.out",
-            }, index ? "<" : ">-0.1")
+            }, index ? "<" : ">-0.3")
         });
     }
 
