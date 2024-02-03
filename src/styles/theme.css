@@ -21,6 +21,7 @@
     --bg-circle: hsla(0, 0%, 87%, var(--opacity));
 
     @media (prefers-color-scheme: dark) {
+        /* --opacity: 0.9; */
         --bg-color: #262626;
         --bg-header: rgba(38, 38, 38, var(--opacity));
         --bg-accent-color: #333333;

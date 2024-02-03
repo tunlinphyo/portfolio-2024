@@ -106,9 +106,10 @@
 
                     > h3 {
                         /* font-size: clamp(3rem, 9vw, 7rem); */
-                        font-size: clamp(2rem, 11vw, 4rem);
+                        font-size: clamp(2rem, 14vw, 10rem);
                         font-weight: 800;
                         line-height: 1.1;
+                        /* text-transform: uppercase; */
                         /* width: min-content; */
 
                         /* color: transparent;
@@ -118,7 +119,7 @@
                             -webkit-text-stroke-width: 3px;
                         } */
                         @media (min-width: 992px) {
-                            font-size: clamp(3rem, 7vw, 7rem);
+                            font-size: clamp(3rem, 9vw, 9rem);
                         }
                     }
                 }

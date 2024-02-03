@@ -20,11 +20,13 @@
             position: relative;
 
             .header-name {
-                font-size: clamp(2.8rem, 12vw, 11rem);
+                font-size: clamp(2.5rem, 12vw, 13rem);
                 font-weight: 900;
                 line-height: 1.25;
+                /* text-transform: uppercase; */
                 margin: 0;
                 transform-origin: left center;
+                /* scale: 1 1.5; */
             }
 
             .hello {

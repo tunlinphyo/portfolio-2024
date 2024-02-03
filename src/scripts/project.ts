@@ -32,7 +32,7 @@ export default class ProjectsAnimation extends BaseElement {
         },
         {
             id: 2,
-            title: 'CoreMobile',
+            title: 'Core Mobile',
             category: 'Portfolio &#10141; React, Next',
             description: `
                 Created a portfolio website for CoreMobile, which included the initial loading animation and scroll

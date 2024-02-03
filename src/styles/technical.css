@@ -17,7 +17,6 @@
     overflow: hidden;
 
     position: fixed;
-    isolation: isolate;
     z-index: 3;
     inset: 0;
     top: var(--header-height);
@@ -37,7 +36,7 @@
         inline-size: var(--size);
         block-size: var(--size);
         border-radius: var(--size);
-        /* border: 2px solid var(--border-color); */
+        border: 2px solid var(--border-color);
 
         /* background-color: var(--fg-color);
         background-image: url(/background.jpeg);
@@ -69,8 +68,7 @@
     }
 
     .technical-cards {
-        position: fixed;
-        isolation: isolate;
+        position: absolute;
         z-index: 2;
         inset: 0;
         overflow: hidden;
@@ -107,10 +105,10 @@
 
             .card-layout {
                 inline-size: 100%;
-                max-inline-size: 540px;
+                max-inline-size: 560px;
                 block-size: 100%;
                 padding-inline: var(--x);
-                padding-block: 12vh var(--x);
+                padding-block: min(13vh, 120px) var(--x);
 
                 display: flex;
                 flex-direction: column;
@@ -119,9 +117,10 @@
                 gap: 1rem;
 
                 > h2 {
-                    font-size: clamp(2rem, 11vw, 4rem);
+                    font-size: clamp(2rem, 10.6vw, 3.8rem);
                     font-weight: 900;
                     line-height: 1.4;
+                    /* text-transform: uppercase; */
                 }
 
                 .skills {

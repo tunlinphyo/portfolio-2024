@@ -74,6 +74,7 @@
 
     .footer-title {
         font-size: clamp(2rem, 11vw, 6rem);
+        /* font-size: clamp(3.5rem, 8.5vw, 10rem); */
         line-height: 1.2;
         font-weight: 800;
         text-transform: uppercase;
@@ -82,7 +83,7 @@
     }
 
     .copyright {
-        position: absolute;
+        position: sticky;
         left: 0;
         bottom: 0;
         inline-size: 100%;

@@ -53,8 +53,8 @@ export default class TechnicalAnimation extends BaseElement {
                 borderRadius: 2,
                 ease: "power4.in",
             }, ">-0.3").to(".technical-intro .section-title", {
-                scale: 4,
-                opacity: 0.5,
+                scale: 3.5,
+                // opacity: 0.5,
             }, "<+0.4")
         })
     }
