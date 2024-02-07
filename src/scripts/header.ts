@@ -40,7 +40,7 @@ export default class HeaderAnimation extends BaseElement {
     protected animate() {
         const fontSize = getStyleValue(".header-name", "font-size")
         const maxSize = parseInt(fontSize)
-        const endScale = gsap.mapRange(0, maxSize, 0, 1, 16)
+        const endScale = gsap.mapRange(0, maxSize, 0, 1, 18)
 
         this.to(".header", {
             height: HEADER_HEIGHT,

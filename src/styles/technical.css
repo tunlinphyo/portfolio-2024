@@ -59,7 +59,7 @@
         /* inline-size: 100vw;
         block-size: calc(100vh - var(--header-height));
         border-radius: 2px; */
-        
+
         > svg {
             width: calc(var(--size) * 0.555);
             height: calc(var(--size) * 0.555);
@@ -85,24 +85,38 @@
             pointer-events: auto;
             /* will-change: transform; */
 
-            inline-size: calc(100vw - var(--x));
+            inline-size: calc(100% - var(--x));
             max-inline-size: 650px;
-            block-size: calc(100vh - var(--dx) - var(--header-height));
+            block-size: calc(100% - var(--x));
             max-block-size: 650px;
             border: 1px solid var(--border-color);
             border-radius: 2px;
             background-color: var(--bg-color);
 
             translate: 100vw 0;
-            scale: .8;
+            scale: .9;
 
             display: flex;
             justify-content: center;
             align-items: center;
 
             @media (min-width: 768px) {
-                rotate: 15deg;
+                scale: .8;
+                rotate: 10deg;
             }
+
+            /* &:nth-child(1) {
+                z-index: 3;
+            }
+            &:nth-child(2) {
+                z-index: 2;
+            }
+            &:nth-child(3) {
+                z-index: 1;
+            }
+            &:nth-child(4) {
+                z-index: 0;
+            } */
 
             .card-layout {
                 inline-size: 100%;

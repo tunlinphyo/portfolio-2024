@@ -73,7 +73,7 @@ export default class TechnicalAnimation extends BaseElement {
                 if (index < cards.length - 1) {
                     this.to(card, {
                         x: "-100vw",
-                        scale: 0.8,
+                        scale: 0.9,
                         // duration: 0.4,
                         ease: "power1.in",
                     }, ">")
@@ -96,7 +96,7 @@ export default class TechnicalAnimation extends BaseElement {
                 if (index < cards.length - 1) {
                     this.to(card, {
                         x: "-100vw",
-                        rotate: -15,
+                        rotate: -10,
                         scale: 0.8,
                         duration: 0.4,
                         ease: "circ.in",
