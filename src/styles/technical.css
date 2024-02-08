@@ -38,16 +38,6 @@
         border-radius: var(--size);
         border: 2px solid var(--border-color);
 
-        /* background-color: var(--fg-color);
-        background-image: url(/background.jpeg);
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-
-        @media (max-width: 600px) {
-            background-image: url(/background-sm.jpeg);
-        } */
-
         background-color: var(--bg-circle);
 
         display: flex;
@@ -55,10 +45,6 @@
         align-items: center;
 
         translate: 0 40vh;
-
-        /* inline-size: 100vw;
-        block-size: calc(100vh - var(--header-height));
-        border-radius: 2px; */
 
         > svg {
             width: calc(var(--size) * 0.555);
@@ -91,8 +77,8 @@
             max-block-size: 650px;
             border: 1px solid var(--border-color);
             border-radius: 2px;
-            background-color: var(--bg-color);
 
+            transform-style: preserve-3d;
             translate: 100vw 0;
             scale: .9;
 

@@ -42,7 +42,7 @@ export default class TechnicalAnimation extends BaseElement {
                 width: "100vw",
                 height: "calc(100vh - 60px)",
                 borderRadius: 2,
-                ease: "power3.in",
+                ease: "power1.in",
             }, ">-0.3")
         })
         this.onMediumAndLargeDevice(() => {
@@ -67,14 +67,14 @@ export default class TechnicalAnimation extends BaseElement {
                 this.to(card, {
                     x: 0,
                     scale: 1,
-                    // duration: 0.4,
-                }, index ? "<" : ">-0.05")
+                    rotateY: 0,
+                    ease: "none",
+                }, index ? "<" : ">")
 
                 if (index < cards.length - 1) {
                     this.to(card, {
                         x: "-100vw",
                         scale: 0.9,
-                        // duration: 0.4,
                         ease: "power1.in",
                     }, ">")
                 }

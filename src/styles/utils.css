@@ -1,5 +1,5 @@
 :root {
-    --max-width: 1500px;
+    --max-width: 1400px;
 
     --header-height: 60px;
     --section-height: calc(100vh - var(--header-height));
@@ -23,7 +23,7 @@ body {
     transform: translateZ(10px);
     backdrop-filter: saturate(180%) blur(10px);
     -webkit-backdrop-filter: saturate(180%) blur(10px);
-    
+
     @media (min-width: 992px) {
         backdrop-filter: saturate(180%) blur(10px);
         -webkit-backdrop-filter: saturate(180%) blur(10px);
@@ -259,4 +259,67 @@ body {
         scale: 0;
         opacity: 0;
     }
+}
+
+.six-cross {
+    pointer-events: none;
+    position: fixed;
+    isolation: isolate;
+    z-index: 1;
+    inset-inline: 0;
+    inset-block-start: 50vh;
+    height: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .container {
+        inline-size: 100%;
+        max-inline-size: var(--max-width);
+        block-size: 0;
+        position: relative;
+
+        .cross {
+            position: absolute;
+            top: 0;
+            right: 0;
+            inline-size: clamp(250px, 40vw, 600px);
+            aspect-ratio: 1 / 1;
+            translate: 50% -50%;
+
+            clip-path: url(#blob);
+            background-color: transparent;
+            backdrop-filter: invert(100%);
+            -webkit-backdrop-filter: invert(100%);
+            transform: translateZ(0);
+
+            /* @media (max-width: 991px) and (prefers-color-scheme: dark) {
+                opacity: .5;
+            }
+
+            @media (max-width: 991px) {
+                opacity: .9;
+                background-color: var(--cross-color);
+            }
+
+            @media (min-width: 992px) {
+                background-color: transparent;
+                backdrop-filter: invert(100%);
+                -webkit-backdrop-filter: invert(100%);
+                transform: translateZ(0);
+            } */
+        }
+    }
+
+
+
+    /* > svg {
+        display: none;
+        inline-size: 100%;
+        block-size: 100%;
+    }
+    @media (prefers-color-scheme: dark) {
+        opacity: 0.4;
+    } */
 }
